@@ -1,0 +1,87 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./resources/**/*.blade.php",
+    "./resources/**/*.js",
+    "./resources/**/*.vue",
+  ],
+  theme: {
+    extend: {
+      container: {
+        screens: {
+          sm: "640px",
+          md: "768px",
+          lg: "980px",
+          xl: "980px",
+          "2xl": "980px",
+        },
+      },
+      lineHeight: {
+        100: "100%",
+        120: "120%",
+        125: "125%",
+        150: "150%",
+        175: "175%",
+        200: "200%",
+      },
+      screens: {
+        'xxxs': "345px",
+        'xxs': '390px',
+        'xs': '520px',
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
+      },
+      fontSize: {
+        'xxxs': '0.5rem',
+        'xxs': '0.6rem',
+        'xs': '0.75rem',    // 12px
+        'sm': '0.875rem',   // 14px
+        'base': '1rem',     // 16px
+        'lg': '1.125rem',   // 18px
+        'xl': '1.25rem',    // 20px
+        '2xl': '1.5rem',    // 24px
+        '3xl': '1.875rem',  // 30px
+        '4xl': '2.25rem',   // 36px
+        '5xl': '3rem',      // 48px
+        '6xl': '3.75rem',   // 60px
+        '7xl': '4.5rem',    // 72px
+        '8xl': '6rem',      // 96px
+        '9xl': '8rem',
+      },
+      colors: {
+        shadow: {
+          500: "#00000030",
+        },
+        primary: {
+          500: "#D8B690",
+        },
+        secondary: {
+          500: "#92A68C"
+        },
+        durazno: "#FACDAE",
+        arena: "#D8B690",
+        salvia: "#92A68C",
+        marfil: {
+          1: "#F5F3E2",
+          2: "#FDFCF8",
+        },
+        gris: {
+          100: "#DDD9CF",
+          500: "#5C5C5C",
+        }
+      }
+    },
+  },
+  safelist: [
+    "rotate-180",
+    "opacity-0",
+    "opacity-100",
+    "fixed",
+    "bottom-0",
+    "hidden",
+  ],
+  plugins: [],
+}

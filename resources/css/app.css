@@ -181,11 +181,11 @@ input:focus {
 }
 
 .carrusel-subir {
-  animation: subir 15s linear infinite;
+  animation: subir 35s linear infinite;
 }
 
 .carrusel-bajar {
-  animation: bajar 15s linear infinite;
+  animation: bajar 30s linear infinite;
 }
 
 @keyframes subir {

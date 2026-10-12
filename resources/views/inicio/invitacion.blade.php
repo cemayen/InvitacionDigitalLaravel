@@ -4,8 +4,10 @@
 
 @section('content')
 @php
-    $fotos = ['assets/imgs/arcoMin/1.webp', 'assets/imgs/arcoMin/2.webp', 'assets/imgs/arcoMin/3.webp', 'assets/imgs/arcoMin/4.webp', 'https://placehold.net/400x400.png'];
-
+    $fotos = [];
+    foreach ([1, 2, 3, 4, 5, 6, 7, 8] as $n) {
+        $fotos[] = "assets/imgs/min/{$n}.webp";
+    }
     // Cada columna con su dirección. Agrega más si quieres: ['subir', 'bajar', 'subir', 'bajar']
     $columnas = ['subir', 'bajar', 'subir'];
 @endphp

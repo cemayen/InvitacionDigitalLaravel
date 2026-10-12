@@ -163,7 +163,8 @@ input:focus {
   mask-repeat: no-repeat;
   mask-image: url('../../public/assets/imgs/mancha2.svg');
   mask-position: center;
-  @apply bg-marfil-2;
+  mask-border: solid 2px #5C5C5C;
+  
 }
 
 .carrusel-track {

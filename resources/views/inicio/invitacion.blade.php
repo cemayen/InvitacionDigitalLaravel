@@ -4,7 +4,7 @@
 
 @section('content')
 @php
-    $fotos = ['https://placehold.net/400x400.png', 'https://placehold.net/400x400.png', 'https://placehold.net/400x400.png', 'https://placehold.net/400x400.png', 'https://placehold.net/400x400.png'];
+    $fotos = ['assets/imgs/arcoMin/1.webp', 'assets/imgs/arcoMin/2.webp', 'assets/imgs/arcoMin/3.webp', 'assets/imgs/arcoMin/4.webp', 'https://placehold.net/400x400.png'];
 
     // Cada columna con su dirección. Agrega más si quieres: ['subir', 'bajar', 'subir', 'bajar']
     $columnas = ['subir', 'bajar', 'subir'];
@@ -16,7 +16,7 @@
 
     <div class="px-4 flex flex-col gap-14">
         <img src="{{ asset('assets/imgs/decorativo.svg') }}" class="w-full sm:max-w-95 max-w-67 mx-auto" alt="decorativo">
-        <img src="{{ asset('assets/imgs/fecha.svg') }}" class="w-full sm:max-w-102.5 max-w-71.5 mx-auto" alt="01/MAYO/2027">
+        <img src="{{ asset('assets/imgs/fecha.svg') }}" class="w-full sm:max-w-102.5 max-w-71.5 mx-auto py-10" alt="01/MAYO/2027">
     </div>
 
     <!-- Countdown Timer -->
@@ -71,9 +71,9 @@
                 <div>
                     <div class="swiper carruselMarcoPrincipal border-[7px] border-arena bg-arena rounded-t-full rounded-b-3xl">
                         <div class="swiper-wrapper">
-                            @for($j = 1; $j <= 2; $j++)
+                            @for($j = 1; $j <= 4; $j++)
                                 <div class="swiper-slide bg-marfil-2">
-                                    <img src="{{ asset("assets/imgs/arco/{$j}.png") }}" class="w-full rounded-t-full rounded-b-3xl" alt="{{ $j }}">
+                                    <img src="{{ asset("assets/imgs/arco/{$j}.webp") }}" class="w-full rounded-t-full rounded-b-3xl" alt="{{ $j }}">
                                 </div>
                             @endfor
                         </div>
@@ -81,7 +81,7 @@
                     <div class="mt-4">
                         <div class="swiper carruselMarcoMiniatura">
                             <div class="swiper-wrapper">
-                                @for($i = 1; $i <= 2; $i++)
+                                @for($i = 1; $i <= 4; $i++)
                                     <div class="swiper-slide size-auto cursor-pointer opacity-60 [&.swiper-slide-thumb-active]:opacity-100 transition-opacity">
                                         <img src="{{ asset("assets/imgs/arcoMin/{$i}.webp") }}" class="size-full rounded-md border-2 border-arena" alt="{{ $i }}">
                                     </div>
@@ -92,54 +92,55 @@
                 </div>
             </div>
         </div>
+        <div class="py-10 flex flex-col gap-14 border-4 border-arena xxs:px-8 px-5 rounded-2xl bg-marfil-1/20">
 
-        <div class="flex flex-col gap-10">
-            <h2 class="text-center text-arena sm:text-4xl text-3xl leading-125">Nuestro Mejor Viaje <br> Empieza Hoy</h2>
-            <div class="flex flex-col gap-5">
-                <p class="sm:text-left text-center">
-                    De la brisa de Coatzacoalcos al corazón de la CDMX, nuestros caminos se cruzaron para empezar
-                    la mayor aventura de nuestras vidas. Entre risas, complicidad y sueños compartidos, descubrimos
-                    que el mejor destino siempre es estar juntos.
-                </p>
-                <p class="sm:text-left text-center">
-                    Hoy, listos para iniciar la expedición más importante y decir ¡Sí, acepto!, queremos que seas
-                    parte del comienzo de nuestro para siempre.
-                </p>
-            </div>
-        </div>
-
-        <img src="{{ asset('assets/imgs/decorativo.svg') }}" class="w-full sm:max-w-95 max-w-67 mx-auto" alt="decorativo">
-
-        <!-- Padres -->
-        <div class="flex flex-col gap-10">
-            <div class="flex items-center w-full">
-                <div class="w-1/3">
-                    <img src="{{ asset('assets/imgs/olivo1.svg') }}" class="xxxs:w-14 w-10 mx-auto -rotate-45" alt="">
+            <div class="flex flex-col gap-10">
+                <h2 class="text-center text-arena sm:text-4xl text-3xl leading-125">Nuestro Mejor Viaje <br> Empieza Hoy</h2>
+                <div class="flex flex-col gap-5">
+                    <p class="sm:text-left text-center">
+                        De la brisa de Coatzacoalcos al corazón de la CDMX, nuestros caminos se cruzaron para empezar
+                        la mayor aventura de nuestras vidas. Entre risas, complicidad y sueños compartidos, descubrimos
+                        que el mejor destino siempre es estar juntos.
+                    </p>
+                    <p class="sm:text-left text-center">
+                        Hoy, listos para iniciar la expedición más importante y decir ¡Sí, acepto!, queremos que seas
+                        parte del comienzo de nuestro para siempre.
+                    </p>
                 </div>
-                <div class="w-2/3 flex flex-col gap-4 pl-2">
-                    <p class="sm:text-2xl text-xl text-right font-bold text-playfair text-arena"><i>Padres de la novia</i></p>
-                    <div class="flex flex-col gap-2">
-                        <p class="text-playfair text-right"><i>Francisco de Jesús Trejo Molina</i></p>
-                        <p class="text-playfair text-right"><i>María del Carmen Lopéz Taxilaga</i></p>
+            </div>
+    
+            {{-- <img src="{{ asset('assets/imgs/decorativo.svg') }}" class="w-full sm:max-w-95 max-w-67 mx-auto" alt="decorativo"> --}}
+            <h3 class="text-center text-arena sm:text-xl text-lg leading-125"><i>¡Con la bendicion de Dios y nustros padres!</i></h3>
+            <!-- Padres -->
+            <div class="flex flex-col gap-10">
+                <div class="flex items-center w-full">
+                    <div class="w-1/3">
+                        <img src="{{ asset('assets/imgs/olivo1.svg') }}" class="xxxs:w-14 w-10 mx-auto -rotate-45" alt="">
+                    </div>
+                    <div class="w-2/3 flex flex-col gap-4 pl-2">
+                        <p class="sm:text-2xl text-xl text-right font-bold text-playfair text-arena"><i>Padres de la novia</i></p>
+                        <div class="flex flex-col gap-2">
+                            <p class="text-playfair text-right"><i>Francisco de Jesús Trejo Molina</i></p>
+                            <p class="text-playfair text-right"><i>María del Carmen Lopéz Taxilaga</i></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center w-full">
+                    <div class="w-2/3 flex flex-col gap-4 pr-2">
+                        <p class="sm:text-2xl text-xl text-left font-bold text-playfair text-arena"><i>Padres del novio</i></p>
+                        <div class="flex flex-col gap-2">
+                            <p class="text-playfair text-left"><i>Alejandro Mayén Tinoco</i></p>
+                            <p class="text-playfair text-left"><i>Nancy Guadalupe Martínez Grañel</i></p>
+                        </div>
+                    </div>
+                    <div class="w-1/3">
+                        <img src="{{ asset('assets/imgs/olivo1.svg') }}" class="xxxs:w-14 w-10 mx-auto rotate-45" alt="">
                     </div>
                 </div>
             </div>
-            <div class="flex items-center w-full">
-                <div class="w-2/3 flex flex-col gap-4 pr-2">
-                    <p class="sm:text-2xl text-xl text-left font-bold text-playfair text-arena"><i>Padres del novio</i></p>
-                    <div class="flex flex-col gap-2">
-                        <p class="text-playfair text-left"><i>Alejandro Mayén Tinoco</i></p>
-                        <p class="text-playfair text-left"><i>Nancy Guadalupe Martínez Grañel</i></p>
-                    </div>
-                </div>
-                <div class="w-1/3">
-                    <img src="{{ asset('assets/imgs/olivo1.svg') }}" class="xxxs:w-14 w-10 mx-auto rotate-45" alt="">
-                </div>
-            </div>
+    
         </div>
-
         <img src="{{ asset('assets/imgs/decorativo.svg') }}" class="w-full sm:max-w-95 max-w-67 mx-auto" alt="decorativo">
-
         <!-- El lugar -->
         <div class="flex flex-col gap-10">
             <h2 class="text-center text-arena sm:text-4xl text-3xl leading-125">El lugar</h2>
@@ -154,27 +155,32 @@
                 </a>
             </div>
         </div>
-        
-
-        <div class="carrusel-vertical w-full aspect-[922/404.46] flex gap-3 px-5">
-            @foreach ($columnas as $c => $direccion)
-                @php
-                    // Invierte el orden en columnas impares para que no coincidan las fotos
-                    // $lista = $c % 2 ? array_reverse($fotos) : $fotos;
-                    $desfase = ($c * 2) % count($fotos);
-                    $lista = [...array_slice($fotos, $desfase), ...array_slice($fotos, 0, $desfase)];
-                @endphp
-                <div class="flex-1 min-w-0 overflow-hidden">
-                    <div class="carrusel-track carrusel-{{ $direccion }}">
-                        @foreach ([...$lista, ...$lista] as $i => $foto)
-                            <img src="{{ asset('' . $foto) }}" alt=""
-                                @if ($i >= count($lista)) aria-hidden="true" @endif>
-                        @endforeach
+    </div>
+    <div class=" w-full">
+        <div class="sm:max-w-150 w-full mx-auto px-4 flex flex-col gap-14">
+            <div class="carrusel-vertical w-full aspect-[923.4/463.9] flex gap-3 px-1">
+                @foreach ($columnas as $c => $direccion)
+                    @php
+                        // Invierte el orden en columnas impares para que no coincidan las fotos
+                        // $lista = $c % 2 ? array_reverse($fotos) : $fotos;
+                        $desfase = ($c * 2) % count($fotos);
+                        $lista = [...array_slice($fotos, $desfase), ...array_slice($fotos, 0, $desfase)];
+                    @endphp
+                    <div class="flex-1 min-w-0 overflow-hidden">
+                        <div class="carrusel-track carrusel-{{ $direccion }}">
+                            @foreach ([...$lista, ...$lista] as $i => $foto)
+                                <img src="{{ asset('' . $foto) }}" alt=""
+                                    @if ($i >= count($lista)) aria-hidden="true" @endif>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
 
+    </div>
+    
+    <div class="sm:max-w-150 w-full mx-auto px-4 flex flex-col gap-14">
         <!-- Código de vestimenta -->
         <div class="flex flex-col gap-10">
             <h2 class="text-center text-arena sm:text-4xl text-3xl leading-125">Código de vestimenta</h2>
@@ -202,28 +208,29 @@
                 </div>
             </div>
         </div>
-
-        <!-- Mesa de regalos -->
-        <div class="flex flex-col gap-10">
-            <h2 class="text-center text-arena sm:text-4xl text-3xl leading-125">Mesa de regalos</h2>
-            <p class="sm:text-left text-center">
-                Tu presencia es nuestro mejor regalo. Si deseas consentirnos con un detalle adicional,
-                puedes consultar nuestra mesa de regalos
-            </p>
-            <img src="{{ asset('assets/imgs/mesaRegalos.svg') }}" class="mx-auto w-full xs:max-w-96 max-w-[90%]" alt="">
-            <a href="#" target="_blank" rel="noopener noreferrer" class="btnSecundario mx-auto">
-                <span class="spanbtn"></span>
-                <p class="relative">Ver mesa de regalos</p>
-            </a>
-            <div class="flex flex-col gap-7">
+        <div class="py-10 flex flex-col gap-14 border-4 border-arena xxs:px-8 px-5 rounded-2xl bg-marfil-1/20">
+            <!-- Mesa de regalos -->
+            <div class="flex flex-col gap-10">
+                <h2 class="text-center text-arena sm:text-4xl text-3xl leading-125">Mesa de regalos</h2>
                 <p class="sm:text-left text-center">
-                    o apoyarnos con una aportación en efectivo para nuestro nuevo hogar
+                    Tu presencia es nuestro mejor regalo. Si deseas consentirnos con un detalle adicional,
+                    puedes consultar nuestra mesa de regalos
                 </p>
-                <p class="text-center underline"><b>00121215452121052</b></p>
-                <img src="{{ asset('assets/imgs/bancoVerde.svg') }}" class="w-60 mx-auto" alt="">
+                <img src="{{ asset('assets/imgs/mesaRegalos.svg') }}" class="mx-auto w-full xs:max-w-96 max-w-[90%]" alt="">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btnSecundario mx-auto">
+                    <span class="spanbtn"></span>
+                    <p class="relative">Ver mesa de regalos</p>
+                </a>
+                <div class="flex flex-col gap-7">
+                    <p class="sm:text-left text-center">
+                        o apoyarnos con una aportación en efectivo para nuestro nuevo hogar
+                    </p>
+                    <p class="text-center underline"><b>00121215452121052</b></p>
+                    <img src="{{ asset('assets/imgs/bancoVerde.svg') }}" class="w-60 mx-auto" alt="">
+                </div>
             </div>
         </div>
-
+    
         <!-- Confirmar Asistencia -->
         <div class="flex flex-col gap-10">
             <h2 class="text-center text-arena sm:text-4xl text-3xl leading-125">Confirmar asistencia</h2>

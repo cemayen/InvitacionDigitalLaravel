@@ -181,11 +181,11 @@ input:focus {
 }
 
 .carrusel-subir {
-  animation: subir 35s linear infinite;
+  animation: subir 40s linear infinite;
 }
 
 .carrusel-bajar {
-  animation: bajar 30s linear infinite;
+  animation: bajar 40s linear infinite;
 }
 
 @keyframes subir {
@@ -201,4 +201,17 @@ input:focus {
 @media (prefers-reduced-motion: reduce) {
   .carrusel-subir,
   .carrusel-bajar { animation: none; }
+}
+
+.latido {
+  animation: latido 1.5s ease-in-out infinite;
+}
+
+@keyframes latido {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .latido { animation: none; }
 }

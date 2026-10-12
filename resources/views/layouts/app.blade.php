@@ -72,9 +72,35 @@
                 });
             }
         }
+        function mesaLottie(){
+            const container = document.getElementById('lottiemesa');
+            if (container && typeof bodymovin !== 'undefined') {
+                bodymovin.loadAnimation({
+                    container: container,
+                    path: '{{ asset("assets/lotties/mesa.json") }}',
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                });
+            }
+        }
+        function carroLottie(){
+            const container = document.getElementById('lottiecarro');
+            if (container && typeof bodymovin !== 'undefined') {
+                bodymovin.loadAnimation({
+                    container: container,
+                    path: '{{ asset("assets/lotties/carro.json") }}',
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                });
+            }
+        }
         window.addEventListener("DOMContentLoaded", () => {
             loaderLottie();
+            mesaLottie();
             vestimentaLottie();
+            carroLottie();
         });
         window.addEventListener("pageshow", () => {
             const elementAnimacionCargando = document.querySelector("#elemento-animacioncargando");

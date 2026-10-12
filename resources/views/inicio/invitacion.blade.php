@@ -16,7 +16,7 @@
         <img src="{{ asset('assets/imgs/sobreNegroAbierto.svg') }}" class="w-full" alt="Sobre Foto">
     </div>
 
-    <div class="px-4 flex flex-col gap-14">
+    <div class="px-4 flex flex-col gap-10">
         <img src="{{ asset('assets/imgs/decorativo.svg') }}" class="w-full sm:max-w-95 max-w-67 mx-auto" alt="decorativo">
         <img src="{{ asset('assets/imgs/fecha.svg') }}" class="w-full sm:max-w-102.5 max-w-71.5 mx-auto py-10" alt="01/MAYO/2027">
     </div>
@@ -60,13 +60,13 @@
         <div class="flex flex-col">
             <div class="grid grid-cols-3 gap-6">
                 <div>
-                    <img src="{{ asset('assets/imgs/flor.svg') }}" class="w-full max-w-40 mr-auto mt-10" alt="">
+                    <img src="{{ asset('assets/imgs/flor.svg') }}" class="w-full max-w-40 mr-auto mt-10 latido" alt="">
                 </div>
                 <div>
-                    <img src="{{ asset('assets/imgs/flor3.svg') }}" class="w-full max-w-32 mx-auto" alt="">
+                    <img src="{{ asset('assets/imgs/flor3.svg') }}" class="w-full max-w-32 mx-auto latido" alt="">
                 </div>
                 <div>
-                    <img src="{{ asset('assets/imgs/flor.svg') }}" class="w-full max-w-40 ml-auto mt-10 scale-x-[-1]" alt="">
+                    <img src="{{ asset('assets/imgs/flor.svg') }}" class="w-full max-w-40 ml-auto mt-10 scale-x-[-1] latido" alt="">
                 </div>
             </div>
             <div class="flex flex-col gap-5 w-10/12 mx-auto relative">
@@ -117,7 +117,7 @@
             <div class="flex flex-col gap-10">
                 <div class="flex items-center w-full">
                     <div class="w-1/3">
-                        <img src="{{ asset('assets/imgs/olivo1.svg') }}" class="xxxs:w-14 w-10 mx-auto -rotate-45" alt="">
+                        <img src="{{ asset('assets/imgs/olivo1.svg') }}" class="xxxs:w-14 w-10 mx-auto -rotate-45 latido" alt="">
                     </div>
                     <div class="w-2/3 flex flex-col gap-4 pl-2">
                         <p class="sm:text-2xl text-xl text-right font-bold text-playfair text-arena"><i>Padres de la novia</i></p>
@@ -136,7 +136,7 @@
                         </div>
                     </div>
                     <div class="w-1/3">
-                        <img src="{{ asset('assets/imgs/olivo1.svg') }}" class="xxxs:w-14 w-10 mx-auto rotate-45" alt="">
+                        <img src="{{ asset('assets/imgs/olivo1.svg') }}" class="xxxs:w-14 w-10 mx-auto rotate-45 latido" alt="">
                     </div>
                 </div>
             </div>
@@ -187,8 +187,8 @@
         <div class="flex flex-col gap-10">
             <h2 class="text-center text-arena sm:text-4xl text-3xl leading-125">Código de vestimenta</h2>
             <div class="relative">
-                <img src="{{ asset('assets/imgs/flor5.svg') }}" class="absolute top-0 left-0 sm:w-32 xs:w-24 w-20" alt="">
-                <img src="{{ asset('assets/imgs/flor5.svg') }}" class="absolute bottom-0 right-0 sm:w-32 xs:w-24 w-20 scale-x-[-1] scale-y-[-1]" alt="">
+                <img src="{{ asset('assets/imgs/flor5.svg') }}" class="absolute top-0 left-0 sm:w-32 xs:w-24 w-20 latido" alt="">
+                <img src="{{ asset('assets/imgs/flor5.svg') }}" class="absolute bottom-0 right-0 sm:w-32 xs:w-24 w-20 scale-x-[-1] scale-y-[-1] latido" alt="">
                 <div class="sm:w-52 w-44 mx-auto relative mb-10" id="lottievestimenta"></div>
             </div>
             <div class="flex flex-col gap-3">
@@ -197,15 +197,15 @@
             </div>
             <div class="xs:w-3/5 mx-auto grid grid-cols-3 gap-4 items-center">
                 <div class="flex flex-col gap-2">
-                    <span class="block size-14 mx-auto bg-arena rounded-full"></span>
+                    <span class="block size-14 mx-auto bg-arena rounded-full latido"></span>
                     <p class="text-center">Arena</p>
                 </div>
                 <div class="flex flex-col gap-2">
-                    <span class="block size-20 mx-auto bg-marfil-2 rounded-full border border-gris-100"></span>
+                    <span class="block size-20 mx-auto bg-marfil-2 rounded-full border border-gris-100 latido"></span>
                     <p class="text-center">Blanco</p>
                 </div>
                 <div class="flex flex-col gap-2">
-                    <span class="block size-14 mx-auto bg-marfil-1 rounded-full"></span>
+                    <span class="block size-14 mx-auto bg-marfil-1 rounded-full latido"></span>
                     <p class="text-center">Marfil</p>
                 </div>
             </div>
@@ -218,7 +218,8 @@
                     Tu presencia es nuestro mejor regalo. Si deseas consentirnos con un detalle adicional,
                     puedes consultar nuestra mesa de regalos
                 </p>
-                <img src="{{ asset('assets/imgs/mesaRegalos.svg') }}" class="mx-auto w-full xs:max-w-96 max-w-[90%]" alt="">
+                {{-- <img src="{{ asset('assets/imgs/mesaRegalos.svg') }}" class="mx-auto w-full xs:max-w-96 max-w-[90%]" alt=""> --}}
+                <div class="mx-auto w-full xs:max-w-96 max-w-[90%]" id="lottiemesa"></div>
                 <a href="#" target="_blank" rel="noopener noreferrer" class="btnSecundario mx-auto">
                     <span class="spanbtn"></span>
                     <p class="relative">Ver mesa de regalos</p>
@@ -244,7 +245,8 @@
                 <p class="relative">Ingresar</p>
             </a>
             <div class="flex justify-center pt-5 pb-16">
-                <img src="{{ asset('assets/imgs/carro.svg') }}" class="w-full xs:max-w-80 max-w-[calc(100%-70px)] xs:-ml-17.5 -ml-12.5" alt="">
+                {{-- <img src="{{ asset('assets/imgs/carro.svg') }}" class="w-full xs:max-w-80 max-w-[calc(100%-70px)] xs:-ml-17.5 -ml-12.5" alt=""> --}}
+                <div class="w-full xs:max-w-80 max-w-[calc(100%-70px)] xs:-ml-17.5 -ml-12.5" id="lottiecarro"></div>
             </div>
         </div>
     </div>

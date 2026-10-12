@@ -119,7 +119,7 @@
                 <div class="w-2/3 flex flex-col gap-4 pl-2">
                     <p class="sm:text-2xl text-xl text-right font-bold text-playfair text-arena"><i>Padres de la novia</i></p>
                     <div class="flex flex-col gap-2">
-                        <p class="text-playfair text-right"><i>Francisco de Jesús Trejo</i></p>
+                        <p class="text-playfair text-right"><i>Francisco de Jesús Trejo Molina</i></p>
                         <p class="text-playfair text-right"><i>María del Carmen Lopéz Taxilaga</i></p>
                     </div>
                 </div>

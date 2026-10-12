@@ -58,6 +58,9 @@ document.addEventListener('DOMContentLoaded', function () {
         let nextElValue = '.swiperNext';
         let prevElValue = '.swiperPrev';
         let centeredSlidesValue = false;
+
+        let effect = "auto";
+
         if (itemsCarrusel.length > 1) {
             loopValue = true;
         } else {
@@ -90,9 +93,37 @@ document.addEventListener('DOMContentLoaded', function () {
             spaceBetweenValueXxs = 16;
             centeredSlidesValue = true;
         }
-
+        if(carrusel.classList.contains("carruselTarjetas")){
+            effect = "cards"
+            slidesPerViewValue = 1;
+            xxl = 1;
+            xl = 1;
+            lg = 1;
+            md = 1;
+            sm = 1;
+            xs = 1;
+            xxs = 1;
+            swiperPagination = ".dotTarjetas"
+            spaceBetweenValue = 0;
+            spaceBetweenValueXxl = 0;
+            spaceBetweenValueXl = 0;
+            spaceBetweenValueLg = 0;
+            spaceBetweenValueMd = 0;
+            spaceBetweenValueSm = 0;
+            spaceBetweenValueXs = 0;
+            spaceBetweenValueXxs = 0;
+            loopValue = false;
+        }
         if (itemsCarrusel.length > 0) {
             var swiper = new Swiper(carrusel, {
+                effect: effect,
+                /* coverflowEffect: {
+                    rotate: 50,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true,
+                }, */
                 grabCursor: true,
                 slidesPerView: slidesPerViewValue,
                 spaceBetween: spaceBetweenValue,

@@ -140,6 +140,17 @@
                     </div>
                 </div>
             </div>
+            <div class="relative w-10/12 mx-auto">
+                <div class="swiper carruselTarjetas">
+                    <div class="swiper-wrapper">
+                        @for($i = 1; $i <= 6; $i++)
+                            <div class="swiper-slide bg-arena p-0.5 rounded-2xl">
+                                <img src="{{ asset("assets/imgs/fam/{$i}.jpg") }}" class="size-full rounded-2xl border-4 border-arena" alt="{{ $i }}">
+                            </div>
+                        @endfor
+                    </div>
+                </div>
+            </div>
     
         </div>
         <img src="{{ asset('assets/imgs/decorativo.svg') }}" class="w-full sm:max-w-95 max-w-67 mx-auto" alt="decorativo">

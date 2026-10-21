@@ -85,6 +85,16 @@
                                 </span>
                             </td>
                             <td class="py-4 px-6 text-right flex justify-end gap-2">
+                                {{-- <a href="{{ $familia->whatsappUrl() }}" target="_blank" rel="noopener"
+                                class="inline-flex items-center gap-2 rounded-lg bg-[#25D366] px-3 py-1.5 text-sm font-medium text-white hover:bg-[#1ebe5a]">
+                                    WhatsApp
+                                </a> --}}
+                                 <button type="button"
+                                        class="btn-compartir px-3 py-1 bg-salvia hover:bg-salvia/80 text-marfil-2 font-medium text-xs rounded transition-colors"
+                                        data-titulo="Invitación familia {{ $familia->nombre_familia }}"
+                                        data-mensaje="{{ $familia->mensajeAcceso() }}">
+                                    Compartir
+                                </button>
                                 <a href="{{ route('dashboard.editar-familia', $familia->id) }}" class="px-3 py-1 bg-arena hover:bg-arena/80 text-marfil-2 font-medium text-xs rounded transition-colors">
                                     Editar
                                 </a>
@@ -107,4 +117,34 @@
         </div>
     </div>
 </div>
+@endsection
+
+
+@section('scripts')
+<script>
+document.addEventListener('click', async (e) => {
+    const btn = e.target.closest('.btn-compartir');
+    if (!btn) return;
+
+    const { titulo, mensaje } = btn.dataset;
+
+    // Menú nativo de compartir (celular y algunos navegadores de escritorio)
+    if (navigator.share) {
+        try {
+            await navigator.share({ title: titulo, text: mensaje });
+        } catch (err) { /* el usuario canceló */ }
+        return;
+    }
+
+    // Respaldo: copiar al portapapeles
+    try {
+        await navigator.clipboard.writeText(mensaje);
+        const original = btn.textContent;
+        btn.textContent = '¡Copiado!';
+        setTimeout(() => btn.textContent = original, 2000);
+    } catch {
+        prompt('Copia el mensaje:', mensaje);
+    }
+});
+</script>
 @endsection

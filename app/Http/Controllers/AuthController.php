@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\User;
 class AuthController extends Controller
 {
     /**
@@ -66,5 +66,23 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login');
+    }
+
+    public function accesoEnlace(Request $request, User $user)
+    {
+        // El enlace no sirve para administradores
+        abort_if($user->rol === 'Admin', 403);
+
+        // Valida contra la fecha_limite que haya en la BD en este momento
+        if (now()->gt($user->fecha_limite->endOfDay())) {
+            return redirect()->route('login')->withErrors([
+                'username' => 'Tu enlace de acceso expiró. Contacta a los organizadores.',
+            ]);
+        }
+
+        Auth::login($user, remember: true);
+        $request->session()->regenerate();
+
+        return redirect()->route('inicio.index');
     }
 }

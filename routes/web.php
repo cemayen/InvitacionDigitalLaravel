@@ -15,6 +15,9 @@ Route::get('/legales', [InicioController::class, 'legales'])->name('inicio.legal
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/acceso/{user}', [AuthController::class, 'accesoEnlace'])
+    ->name('acceso')
+    ->middleware(['signed', 'throttle:20,1']);
 
 // Rutas del Panel Administrador (Protegidas por Admin)
 Route::middleware(['auth', 'role:Admin'])->prefix('dashboard')->name('dashboard.')->group(function () {

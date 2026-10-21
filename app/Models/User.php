@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\URL;
 
 class User extends Authenticatable
 {
@@ -59,5 +60,24 @@ class User extends Authenticatable
     public function invitados(): HasMany
     {
         return $this->hasMany(Invitado::class);
+    }
+    public function accesoUrl(): string
+    {
+        return URL::signedRoute('acceso', ['user' => $this->id]);
+    }
+
+    public function whatsappUrl(): string
+    {
+        $mensaje = "¡Hola {$this->nombre_familia}! Este es tu enlace para confirmar tu asistencia:\n"
+                . $this->accesoUrl()
+                . "\n\nTienes hasta el " . $this->fecha_limite->format('d/m/Y') . ' para confirmar.';
+
+        return 'https://wa.me/?text=' . rawurlencode($mensaje);
+    }
+    public function mensajeAcceso(): string
+    {
+        return "¡Hola familia {$this->nombre_familia}! Este es tu enlace para confirmar tu asistencia:\n"
+            . $this->accesoUrl()
+            . "\n\nTienes hasta el " . $this->fecha_limite->format('d/m/Y') . ' para confirmar.';
     }
 }

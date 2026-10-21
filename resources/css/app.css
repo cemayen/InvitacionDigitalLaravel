@@ -215,3 +215,88 @@ input:focus {
 @media (prefers-reduced-motion: reduce) {
   .latido { animation: none; }
 }
+
+.bgFamilia {
+  position: relative;
+  isolation: isolate;
+}
+
+.bgFamilia::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  @apply  rounded-2xl rotate-1 bg-arena/70;
+}
+.bgFamilia::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  @apply border-2 border-arena rounded-2xl -rotate-1 bg-marfil-2;
+}
+
+
+
+.bgtarjetas {
+  position: relative;
+  isolation: isolate;
+  padding: 50px 10px;
+}
+
+.bgtarjetas::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  @apply  rounded-2xl rotate-2 bg-arena/70;
+}
+.bgtarjetas::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  @apply border-2 border-arena rounded-2xl -rotate-2 bg-marfil-2;
+}
+
+
+
+/* Clase reutilizable para las esquinas invertidas */
+.ticket {
+  --r: 40px;  /* radio de la curva */
+  --o: 0px;   /* desplazamiento (solo lo usa el div interno) */
+  --c: calc(var(--r) + var(--o));
+  --g: #0000 var(--c), #000 calc(var(--c) + 0.5px);
+
+  -webkit-mask:
+    radial-gradient(circle at calc(-1 * var(--o)) calc(-1 * var(--o)), var(--g)) top left,
+    radial-gradient(circle at calc(100% + var(--o)) calc(-1 * var(--o)), var(--g)) top right,
+    radial-gradient(circle at calc(-1 * var(--o)) calc(100% + var(--o)), var(--g)) bottom left,
+    radial-gradient(circle at calc(100% + var(--o)) calc(100% + var(--o)), var(--g)) bottom right;
+  -webkit-mask-size: 51% 51%;
+  -webkit-mask-repeat: no-repeat;
+
+  mask:
+    radial-gradient(circle at calc(-1 * var(--o)) calc(-1 * var(--o)), var(--g)) top left,
+    radial-gradient(circle at calc(100% + var(--o)) calc(-1 * var(--o)), var(--g)) top right,
+    radial-gradient(circle at calc(-1 * var(--o)) calc(100% + var(--o)), var(--g)) bottom left,
+    radial-gradient(circle at calc(100% + var(--o)) calc(100% + var(--o)), var(--g)) bottom right;
+  mask-size: 51% 51%;
+  mask-repeat: no-repeat;
+}
+
+/* Div externo: su fondo es el color del borde */
+.exterior {
+  --borde: 4px;
+ 
+  padding: var(--borde);
+}
+
+/* Div interno: se desplaza lo mismo que el grosor del borde */
+.interior {
+  --o: var(--borde);
+    background-image: url(../../public/assets/imgs/textura.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

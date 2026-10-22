@@ -12,18 +12,18 @@
     $columnas = ['subir', 'bajar', 'subir'];
 @endphp
 <section class="w-full flex flex-col gap-14 overflow-x-hidden">
-    <div class="sm:max-w-150 w-full mx-auto">
+    <div class="sm:max-w-150 w-full mx-auto flex flex-col gap-5">
         <img src="{{ asset('assets/imgs/sobreNegroAbierto.svg') }}" class="w-full" alt="Sobre Foto">
+        <div class="px-4 flex flex-col gap-5">
+            <img src="{{ asset('assets/imgs/decorativo.svg') }}" class="w-full sm:max-w-95 max-w-67 mx-auto" alt="decorativo">
+            <img src="{{ asset('assets/imgs/fecha.svg') }}" class="w-full sm:max-w-102.5 max-w-71.5 mx-auto py-10" alt="01/MAYO/2027">
+        </div>
     </div>
 
-    <div class="px-4 flex flex-col gap-10">
-        <img src="{{ asset('assets/imgs/decorativo.svg') }}" class="w-full sm:max-w-95 max-w-67 mx-auto" alt="decorativo">
-        <img src="{{ asset('assets/imgs/fecha.svg') }}" class="w-full sm:max-w-102.5 max-w-71.5 mx-auto py-10" alt="01/MAYO/2027">
-    </div>
 
     <!-- Countdown Timer -->
-    <div class="bg-arena py-14 w-full">
-        <div class="sm:max-w-150 w-full mx-auto px-4 flex flex-col sm:gap-14 gap-7">
+    <div class="bg-arena py-14 w-full relative">
+        <div class="sm:max-w-150 w-full mx-auto px-4 flex flex-col sm:gap-10 gap-7">
             <h3 class="sm:text-4xl text-3xl text-center text-marfil-2">Faltan</h3>
             <div class="flex xxs:gap-4 gap-3 justify-center">
                 <div class="w-fit text-marfil-2 flex flex-col gap-3">
@@ -98,9 +98,9 @@
             <div class="ticket exterior xxs:px-8 px-5 bg-arena">
                 <div class="ticket interior bg-marfil-2 flex flex-col gap-14 px-10 py-16 relative">
                     <div class="flex flex-col gap-10">
-                        <img src="{{ asset('assets/imgs/flor5.svg') }}" class="w-full latido sm:max-w-20 absolute left-0 ml-6 top-0 mt-6 mx-auto" alt="flor">
-                        <img src="{{ asset('assets/imgs/flor5.svg') }}" class="w-full latido sm:max-w-20 absolute right-0 top-0 scale-x-[-1] mt-6 mr-6 mx-auto" alt="flor">
-                        <h2 class="text-center text-arena sm:text-4xl text-3xl leading-125">Nuestro Mejor Viaje <br> Empieza Hoy</h2>
+                        <img src="{{ asset('assets/imgs/flor5.svg') }}" class="w-full latido xs:max-w-20 max-w-28 absolute left-0 xs:ml-6 top-0 xs:mt-6 -ml-7 -mt-2 mx-auto" alt="flor">
+                        <img src="{{ asset('assets/imgs/flor5.svg') }}" class="w-full latido xs:max-w-20 max-w-28 absolute right-0 top-0 scale-x-[-1] xs:mt-6 xs:mr-6 -mt-2 -mr-7 mx-auto" alt="flor">
+                        <h2 class="text-center text-arena sm:text-4xl text-3xl leading-125 relative">Nuestro Mejor Viaje <br> Empieza Hoy</h2>
                         <div class="flex flex-col gap-5">
                             <p class="sm:text-left text-center">
                                 De la brisa de Coatzacoalcos al corazón de la CDMX, nuestros caminos se cruzaron para empezar
@@ -159,7 +159,7 @@
                             <div class="swiper-wrapper">
                                 @for($i = 1; $i <= 6; $i++)
                                     <div class="swiper-slide bg-arena p-0.5 rounded-2xl">
-                                        <img src="{{ asset("assets/imgs/fam/{$i}.jpg") }}" class="size-full rounded-2xl border-4 border-arena" alt="{{ $i }}">
+                                        <img src="{{ asset("assets/imgs/fam/{$i}.jpg") }}" class="size-full rounded-2xl xs:border-4 border-2 border-arena" alt="{{ $i }}">
                                     </div>
                                 @endfor
                             </div>

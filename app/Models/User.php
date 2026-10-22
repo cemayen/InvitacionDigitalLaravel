@@ -65,6 +65,10 @@ class User extends Authenticatable
     {
         return URL::signedRoute('acceso', ['user' => $this->id]);
     }
+    public function urlNormal(): string
+    {
+        return route('inicio.index'); 
+    }
 
     public function whatsappUrl(): string
     {
@@ -76,8 +80,14 @@ class User extends Authenticatable
     }
     public function mensajeAcceso(): string
     {
-        return "¡Hola familia {$this->nombre_familia}! Este es tu enlace para confirmar tu asistencia:\n"
-            . $this->accesoUrl()
+        return "¡Hola familia {$this->nombre_familia}! \n"
+            ."¡Nos hace muy felices darles esta noticia! Queremos que sean parte fundamental de uno de los días más importantes de nuestras vidas y nos encantaría que nos acompañen a celebrar nuestra boda. \n"
+            ."Preparamos un espacio digital con toda la información y detalles para este gran día. Pueden verlo aquí: \n"
+            ."🔗 Invitación: {$this->urlNormal()} \n"
+            ."Credenciales de acceso: \n Usuario: {$this->username} \n Contraseña: {$this->username}1527 \n"
+            ."O si prefieres ingresar de inmediato con un solo clic, usa este enlace: \n"
+            ."Acceso directo: {$this->accesoUrl()}"
+            ."\n\n¡Esperamos de corazón contar con su presencia para festejar juntos! ❤️"
             . "\n\nTienes hasta el " . $this->fecha_limite->format('d/m/Y') . ' para confirmar.';
     }
 }

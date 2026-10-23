@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Invitado;
+use App\Exports\ConfirmadosExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -189,6 +192,48 @@ class DashboardController extends Controller
             ->get();
 
         return view('dashboard.lista-confirmados', compact('familias'));
+    }
+
+    /**
+     * Exporta la lista de confirmados a formato Excel (.xlsx).
+     */
+    public function exportarConfirmadosExcel()
+    {
+        $fecha = now()->format('Y-m-d_H-i');
+        return Excel::download(new ConfirmadosExport, "Invitados_Confirmados_{$fecha}.xlsx");
+    }
+
+    /**
+     * Exporta la lista de confirmados a formato PDF.
+     */
+    public function exportarConfirmadosPdf()
+    {
+        $familias = User::where('rol', 'Invitado')
+            ->whereHas('invitados', function ($query) {
+                $query->whereNotNull('nombre_completo')
+                    ->where('nombre_completo', '!=', '');
+            })
+            ->with(['invitados' => function ($query) {
+                $query->whereNotNull('nombre_completo')
+                    ->where('nombre_completo', '!=', '');
+            }])
+            ->orderBy('nombre_familia')
+            ->get();
+
+        $totalConfirmados = Invitado::whereNotNull('nombre_completo')
+            ->where('nombre_completo', '!=', '')
+            ->whereHas('user', function ($q) {
+                $q->where('rol', 'Invitado');
+            })
+            ->count();
+
+        $totalCabana = $familias->where('opcion_cabana', true)->count();
+
+        $pdf = Pdf::loadView('pdf.confirmados', compact('familias', 'totalConfirmados', 'totalCabana'));
+        $pdf->setPaper('a4', 'portrait');
+
+        $fecha = now()->format('Y-m-d_H-i');
+        return $pdf->download("Invitados_Confirmados_{$fecha}.pdf");
     }
 
     /**

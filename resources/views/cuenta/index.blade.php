@@ -19,42 +19,42 @@
     </div>
 
     <div class="flex flex-col gap-12">
-      <form action="{{ route('cuenta.guardar-invitados') }}" method="POST">
-    @csrf
+        <form action="{{ route('cuenta.guardar-invitados') }}" method="POST">
+            @csrf
 
-    <div class="flex flex-col gap-5">
-        @foreach($familia->invitados as $index => $invitado)
-            <div class="flex flex-col gap-1">
-                <label class="label">Boleto / Pase #{{ $index + 1 }}</label>
+            <div class="flex flex-col gap-5">
+                @foreach($familia->invitados as $index => $invitado)
+                    <div class="flex flex-col gap-1">
+                        <label class="label">Boleto / Pase #{{ $index + 1 }}</label>
 
-                <input type="hidden" name="invitados[{{ $index }}][id]" value="{{ $invitado->id }}">
-                <input type="text"
-                    name="invitados[{{ $index }}][nombre_completo]"
-                    value="{{ old("invitados.$index.nombre_completo", $invitado->nombre_completo) }}"
-                    class="input"
-                    placeholder="Nombre completo del invitado"
-                    {{ $edicionBloqueada ? 'disabled' : '' }} />
+                        <input type="hidden" name="invitados[{{ $index }}][id]" value="{{ $invitado->id }}">
+                        <input type="text"
+                            name="invitados[{{ $index }}][nombre_completo]"
+                            value="{{ old("invitados.$index.nombre_completo", $invitado->nombre_completo) }}"
+                            class="input"
+                            placeholder="Nombre completo del invitado"
+                            {{ $edicionBloqueada ? 'disabled' : '' }} />
+                    </div>
+                @endforeach
+
+                @if (!$edicionBloqueada)
+                    <button type="submit" class="btnPrincipal w-full mx-auto mt-5">
+                        <span class="spanbtn"></span>
+                        <p class="relative">Confirmar</p>
+                    </button>
+                @endif
+
+                @if ($familia->invitados->filter(fn ($i) => trim($i->nombre_completo ?? '') !== '')->isNotEmpty())
+                    <a href="{{ route('cuenta.descargar-boleto') }}" target="_blank"
+                    class="inline-flex items-center justify-center gap-2 mt-3 text-sm font-semibold text-arena hover:underline">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Descargar boleto familiar (PDF)
+                    </a>
+                @endif
             </div>
-        @endforeach
-
-        @if (!$edicionBloqueada)
-            <button type="submit" class="btnPrincipal w-full mx-auto mt-5">
-                <span class="spanbtn"></span>
-                <p class="relative">Confirmar</p>
-            </button>
-        @endif
-
-        @if ($familia->invitados->filter(fn ($i) => trim($i->nombre_completo ?? '') !== '')->isNotEmpty())
-            <a href="{{ route('cuenta.descargar-boleto') }}" target="_blank"
-               class="inline-flex items-center justify-center gap-2 mt-3 text-sm font-semibold text-arena hover:underline">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                Descargar boleto familiar (PDF)
-            </a>
-        @endif
-    </div>
-</form>
+        </form>
         <div class="flex flex-col gap-2">
             @if ($yaRegistrados)
                 <div class="p-4 text-sm text-salvia rounded-lg bg-salvia/10 border border-salvia text-center font-medium">

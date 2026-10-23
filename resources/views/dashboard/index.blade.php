@@ -90,6 +90,7 @@
                                     WhatsApp
                                 </a> --}}
                                  <button type="button"
+                                        data-target="noBlank"
                                         class="btn-compartir px-3 py-1 bg-salvia hover:bg-salvia/80 text-marfil-2 font-medium text-xs rounded transition-colors"
                                         data-titulo="Invitación familia {{ $familia->nombre_familia }}"
                                         data-mensaje="{{ $familia->mensajeAcceso() }}">
@@ -98,10 +99,10 @@
                                 <a href="{{ route('dashboard.editar-familia', $familia->id) }}" class="px-3 py-1 bg-arena hover:bg-arena/80 text-marfil-2 font-medium text-xs rounded transition-colors">
                                     Editar
                                 </a>
-                                <form action="{{ route('dashboard.eliminar-familia', $familia->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar a la familia {{ $familia->nombre_familia }}?');">
+                                <form action="{{ route('dashboard.eliminar-familia', $familia->id) }}" method="POST" onsubmit="if (!confirm('¿Estás seguro de eliminar a la familia {{ $familia->nombre_familia }}?')) { ocultarCargando(); return false; } mostrarCargando();">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="px-3 py-1 bg-rose-50 hover:bg-rose-100 text-rose-600 font-medium text-xs rounded transition-colors">
+                                    <button type="submit" data-target="noBlank" class="px-3 py-1 bg-rose-50 hover:bg-rose-100 text-rose-600 font-medium text-xs rounded transition-colors">
                                         Eliminar
                                     </button>
                                 </form>

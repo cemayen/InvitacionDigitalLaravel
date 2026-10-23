@@ -28,6 +28,8 @@ Route::middleware(['auth', 'role:Admin'])->prefix('dashboard')->name('dashboard.
     Route::post('/editar-familia/{id}', [DashboardController::class, 'editarFamilia'])->name('editar-familia.update');
     Route::get('/lista-invitados', [DashboardController::class, 'listaInvitados'])->name('lista-invitados');
     Route::get('/lista-confirmados', [DashboardController::class, 'listaConfirmados'])->name('lista-confirmados');
+    Route::get('/lista-confirmados/excel', [DashboardController::class, 'exportarConfirmadosExcel'])->name('confirmados.excel');
+    Route::get('/lista-confirmados/pdf', [DashboardController::class, 'exportarConfirmadosPdf'])->name('confirmados.pdf');
     Route::delete('/eliminar-familia/{id}', [DashboardController::class, 'eliminarFamilia'])->name('eliminar-familia');
 });
 

@@ -103,4 +103,55 @@ class DashboardTest extends TestCase
         $this->assertDatabaseMissing('users', ['id' => $familia->id]);
         $this->assertDatabaseMissing('invitados', ['id' => $invitado->id]);
     }
+
+    public function test_admin_can_export_confirmados_excel()
+    {
+        $familia = User::create([
+            'nombre_familia' => 'Familia Confirmada Excel',
+            'username' => 'confirmadoexcel',
+            'password' => 'password123',
+            'cantidad_boletos' => 1,
+            'rol' => 'Invitado',
+        ]);
+        $familia->invitados()->create(['nombre_completo' => 'Invitado Excel', 'confirmado' => true]);
+
+        $response = $this->actingAs($this->admin)->get(route('dashboard.confirmados.excel'));
+
+        $response->assertStatus(200);
+        $response->assertHeader('content-disposition');
+    }
+
+    public function test_admin_can_export_confirmados_pdf()
+    {
+        $familia = User::create([
+            'nombre_familia' => 'Familia Confirmada PDF',
+            'username' => 'confirmadopdf',
+            'password' => 'password123',
+            'cantidad_boletos' => 1,
+            'rol' => 'Invitado',
+        ]);
+        $familia->invitados()->create(['nombre_completo' => 'Invitado PDF', 'confirmado' => true]);
+
+        $response = $this->actingAs($this->admin)->get(route('dashboard.confirmados.pdf'));
+
+        $response->assertStatus(200);
+        $response->assertHeader('content-type', 'application/pdf');
+    }
+
+    public function test_non_admin_cannot_export_confirmados()
+    {
+        $familia = User::create([
+            'nombre_familia' => 'Usuario Normal',
+            'username' => 'usuarionormal',
+            'password' => 'password123',
+            'cantidad_boletos' => 1,
+            'rol' => 'Invitado',
+        ]);
+
+        $responseExcel = $this->actingAs($familia)->get(route('dashboard.confirmados.excel'));
+        $responseExcel->assertStatus(403);
+
+        $responsePdf = $this->actingAs($familia)->get(route('dashboard.confirmados.pdf'));
+        $responsePdf->assertStatus(403);
+    }
 }

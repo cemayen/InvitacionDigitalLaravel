@@ -17,13 +17,19 @@ window.addEventListener("load", () => ocultarCargando());
 
 // Listeners globales para animación cargando
 document.addEventListener("DOMContentLoaded", () => {
-    const listaLinksDocumento = document.querySelectorAll('a[href*="/"]:not([target="_blank"]):not([href*="#"])');
+    const listaLinksDocumento = document.querySelectorAll('a[href*="/"]:not([target="_blank"]):not([href*="#"]):not([data-target="noBlank"]), button:not([data-target="noBlank"])');
     if (listaLinksDocumento) {
         listaLinksDocumento.forEach(link => link.addEventListener('click', () => mostrarCargando()));
     }
     const listaFormsDocumento = document.querySelectorAll("form");
     if (listaFormsDocumento) {
-        listaFormsDocumento.forEach(form => form.addEventListener('submit', () => mostrarCargando()));
+        listaFormsDocumento.forEach(form => form.addEventListener('submit', (e) => {
+            if (e.defaultPrevented) {
+                ocultarCargando();
+                return;
+            }
+            mostrarCargando();
+        }));
     }
 });
 
@@ -350,10 +356,13 @@ function confirmarEliminarFamilia() {
     if (!idFamilia) return;
 
     if (confirm(`¿Estás seguro de que deseas eliminar a la familia "${nombreFamilia}"? Esta acción borrará también todos sus boletos asignados.`)) {
+        mostrarCargando();
         const form = document.getElementById('formEliminarFamilia');
         const deleteId = document.getElementById('delete_Id');
         if (deleteId) deleteId.value = idFamilia;
         if (form) form.submit();
+    } else {
+        ocultarCargando();
     }
 }
 

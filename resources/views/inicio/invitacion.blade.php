@@ -309,6 +309,9 @@
                 </div>
             </div>
         </div>
+        <div >
+
+        </div>
     
         <!-- Confirmar Asistencia -->
         <div class="ticket exterior xxs:px-8 px-5 bg-arena">

@@ -67,6 +67,7 @@ export default {
         marfil: {
           1: "#F5F3E2",
           2: "#FDFCF8",
+          3: "#fefaf4",
         },
         gris: {
           100: "#DDD9CF",

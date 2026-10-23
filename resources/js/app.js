@@ -1,36 +1,38 @@
-
-
-//// REQUERIDO
+//// Funciones de Loading
 function mostrarCargando(mensaje = "Cargando . . .") {
-    let mensajeCargando = document.getElementById("mensajeCargando");
-    mensajeCargando.textContent = mensaje;
+    const mensajeCargando = document.getElementById("mensajeCargando");
+    if (mensajeCargando) mensajeCargando.textContent = mensaje;
     const elementoAnimacionCargando = document.querySelector("#elemento-animacioncargando");
-    elementoAnimacionCargando.classList.remove("hidden");
+    if (elementoAnimacionCargando) elementoAnimacionCargando.classList.remove("hidden");
     document.body.style.overflow = 'hidden';
 }
 
-
-// REQUERIDO
 function ocultarCargando() {
     const elementoAnimacionCargando = document.querySelector("#elemento-animacioncargando");
-    elementoAnimacionCargando.classList.add("hidden");
+    if (elementoAnimacionCargando) elementoAnimacionCargando.classList.add("hidden");
     document.body.style.overflow = '';
 }
 
-// Util para retirar loadings colgados entre cambios de vistas. Eliminar si lo considera necesario.
-//window.addEventListener("pageshow", () => ocultarCargando());
-document.addEventListener("load", () => ocultarCargando());
+window.addEventListener("load", () => ocultarCargando());
 
+// Listeners globales para animación cargando
+document.addEventListener("DOMContentLoaded", () => {
+    const listaLinksDocumento = document.querySelectorAll('a[href*="/"]:not([target="_blank"]):not([href*="#"])');
+    if (listaLinksDocumento) {
+        listaLinksDocumento.forEach(link => link.addEventListener('click', () => mostrarCargando()));
+    }
+    const listaFormsDocumento = document.querySelectorAll("form");
+    if (listaFormsDocumento) {
+        listaFormsDocumento.forEach(form => form.addEventListener('submit', () => mostrarCargando()));
+    }
+});
 
-// Se puede eliminar. funcionalidad para agregar por default animacion cargando a todos los elementos link y form del documento.
-const listaLinksDocumento = document.querySelectorAll('a[href*="/"]:not([target="_blank"]):not([href*="#"])');
-if (listaLinksDocumento) listaLinksDocumento.forEach(link => link.addEventListener('click', () => mostrarCargando()));
-const listaFormsDocumento = document.querySelectorAll("form");
-if (listaFormsDocumento) listaFormsDocumento.forEach(form => form.addEventListener('submit', () => mostrarCargando()));
-
-
-// Logica para el carrusel de swiper
+// Lógica para el carrusel de swiper
 document.addEventListener('DOMContentLoaded', function () {
+    if (typeof Swiper === 'undefined') {
+        return;
+    }
+
     const carruseles = document.querySelectorAll('.swiper');
     carruseles.forEach((carrusel) => {
         const contenedorCarrusel = carrusel.querySelector('.swiper-wrapper');
@@ -58,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function () {
         let nextElValue = '.swiperNext';
         let prevElValue = '.swiperPrev';
         let centeredSlidesValue = false;
-
         let effect = "auto";
 
         if (itemsCarrusel.length > 1) {
@@ -66,15 +67,18 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             loopValue = false;
         }
+
         if (carrusel.classList.contains('carruselPrincipal')) {
             nextElValue = ".nextPrincipal";
             prevElValue = ".prevPrincipal";
-            swiperPagination = ".paginationPrincipal"
+            swiperPagination = ".paginationPrincipal";
         }
-        if(carrusel.classList.contains('carruselMarcoPrincipal') || carrusel.classList.contains('carruselMarcoMiniatura')){
+
+        if (carrusel.classList.contains('carruselMarcoPrincipal') || carrusel.classList.contains('carruselMarcoMiniatura')) {
             return;
         }
-        if(carrusel.classList.contains('swiperCuadros')){
+
+        if (carrusel.classList.contains('swiperCuadros')) {
             slidesPerViewValue = 2;
             xxl = 2;
             xl = 2;
@@ -93,8 +97,9 @@ document.addEventListener('DOMContentLoaded', function () {
             spaceBetweenValueXxs = 16;
             centeredSlidesValue = true;
         }
-        if(carrusel.classList.contains("carruselTarjetas")){
-            effect = "cards"
+
+        if (carrusel.classList.contains("carruselTarjetas")) {
+            effect = "cards";
             slidesPerViewValue = 1;
             xxl = 1;
             xl = 1;
@@ -103,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
             sm = 1;
             xs = 1;
             xxs = 1;
-            swiperPagination = ".dotTarjetas"
+            swiperPagination = ".dotTarjetas";
             spaceBetweenValue = 0;
             spaceBetweenValueXxl = 0;
             spaceBetweenValueXl = 0;
@@ -113,18 +118,12 @@ document.addEventListener('DOMContentLoaded', function () {
             spaceBetweenValueXs = 0;
             spaceBetweenValueXxs = 0;
             loopValue = false;
-            delayValue =50000;
+            delayValue = 50000;
         }
+
         if (itemsCarrusel.length > 0) {
-            var swiper = new Swiper(carrusel, {
+            new Swiper(carrusel, {
                 effect: effect,
-                /* coverflowEffect: {
-                    rotate: 50,
-                    stretch: 0,
-                    depth: 100,
-                    modifier: 1,
-                    slideShadows: true,
-                }, */
                 grabCursor: true,
                 slidesPerView: slidesPerViewValue,
                 spaceBetween: spaceBetweenValue,
@@ -176,12 +175,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-
     // Instalaciones: thumbs + principal
-    var thumbsEl = document.querySelector('.carruselMarcoMiniatura');
-    var principalEl = document.querySelector('.carruselMarcoPrincipal');
+    const thumbsEl = document.querySelector('.carruselMarcoMiniatura');
+    const principalEl = document.querySelector('.carruselMarcoPrincipal');
     if (thumbsEl && principalEl) {
-        var swiperThumbs = new Swiper(thumbsEl, {
+        const swiperThumbs = new Swiper(thumbsEl, {
             spaceBetween: 16,
             slidesPerView: 4,
             freeMode: true,
@@ -210,113 +208,125 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-let verMensaje = document.getElementById("verMensaje")
-function verMensajeUno(){
-    verMensaje.classList.remove("hidden");
-    verMensaje.classList.add("block")
-}
-document.addEventListener('DOMContentLoaded', function (){
-
-    if(verMensaje){
-        setTimeout(()=>{
-            verMensajeUno();
-        }, 5000)
+// Mensaje flotante sobre
+function verMensajeUno() {
+    const verMensaje = document.getElementById("verMensaje");
+    if (verMensaje) {
+        verMensaje.classList.remove("hidden");
+        verMensaje.classList.add("block");
     }
-})
+}
 
+document.addEventListener('DOMContentLoaded', function () {
+    const verMensaje = document.getElementById("verMensaje");
+    if (verMensaje) {
+        setTimeout(() => {
+            verMensajeUno();
+        }, 5000);
+    }
+});
+
+// Mostrar/Ocultar contraseña
 function mostarOcultarContraseña(elemento) {
-    const contenedor = elemento.closest('.inputContraseña');
+    const contenedor = elemento.closest('.inputContraseña') || elemento.closest('.relative');
+    if (!contenedor) return;
+
     const input = contenedor.querySelector('input');
     const iconShow = contenedor.querySelector('.iconShowPassword');
     const iconHidden = contenedor.querySelector('.iconHiddenPassword');
 
-    
+    if (!input) return;
+
     if (input.type === 'password') {
         input.type = 'text';
-
-        iconShow.classList.add('hidden');
-        iconHidden.classList.remove('hidden');
+        if (iconShow) iconShow.classList.add('hidden');
+        if (iconHidden) iconHidden.classList.remove('hidden');
     } else {
         input.type = 'password';
-
-        iconShow.classList.remove('hidden');
-        iconHidden.classList.add('hidden');
+        if (iconShow) iconShow.classList.remove('hidden');
+        if (iconHidden) iconHidden.classList.add('hidden');
     }
 }
-window.mostarOcultarContraseña = mostarOcultarContraseña;
 
-/* function AbrirModalEditarFamilia() {
-    const EditarFamilia = document.getElementById('ModalEditarFamilia');
-    const contenidoEditarFamilia = document.getElementById('contenidoEditarFamilia');
-
-    EditarFamilia.classList.remove('hidden');
-
-    setTimeout(() => {
-        contenidoEditarFamilia.classList.remove('translate-y-[100vh]');
-    }, 300);
-
-    // Click fuera del contenido
-    EditarFamilia.addEventListener('click', cerrarEditarFamiliaFuera);
-} */
+// Modal Editar Familia
 function AbrirModalEditarFamilia(familia) {
     const EditarFamilia = document.getElementById('ModalEditarFamilia');
     const contenidoEditarFamilia = document.getElementById('contenidoEditarFamilia');
+    const formModal = document.getElementById('formModalEditarFamilia');
+
+    if (!EditarFamilia || !contenidoEditarFamilia) return;
+
+    if (formModal && familia.id) {
+        formModal.action = '/dashboard/editar-familia/' + familia.id;
+    }
 
     // 1. Asignar datos principales
-    document.getElementById('edit_Id').value = familia.id;
-    document.getElementById('familia').value = familia.nombreFamilia;
-    // Evalúa ambos casos por si C# lo envió en PascalCase (Username)
+    const inputId = document.getElementById('edit_Id');
+    if (inputId) inputId.value = familia.id || '';
+
+    const inputFamilia = document.getElementById('familia');
+    if (inputFamilia) inputFamilia.value = familia.nombre_familia || familia.nombreFamilia || '';
+
     const inputUsername = document.getElementById('edit_Username');
-    if (inputUsername) {
-        inputUsername.value = familia.username || familia.Username || '';
-    }
-    document.getElementById('contrasenaFamilia').value = ''; // Se deja vacío para no sobrescribir si no se cambia
-    document.getElementById('boletos').value = familia.cantidadBoletos;
-    document.getElementById('invitadoCabana').value = familia.opcionCabana ? "true" : "false";
+    if (inputUsername) inputUsername.value = familia.username || familia.Username || '';
+
+    const inputPass = document.getElementById('contrasenaFamilia');
+    if (inputPass) inputPass.value = '';
+
+    const inputBoletos = document.getElementById('boletos');
+    if (inputBoletos) inputBoletos.value = familia.cantidad_boletos ?? familia.cantidadBoletos ?? 2;
+
+    const inputCabana = document.getElementById('invitadoCabana');
+    if (inputCabana) inputCabana.value = (familia.opcion_cabana ?? familia.opcionCabana) ? "1" : "0";
 
     const inputFecha = document.getElementById('editFechaLimite');
     if (inputFecha) {
-        inputFecha.value = familia.fechaLimite ? familia.fechaLimite : '';
+        let fecha = familia.fecha_limite || familia.fechaLimite || '';
+        if (typeof fecha === 'string' && fecha.includes('T')) {
+            fecha = fecha.split('T')[0];
+        }
+        inputFecha.value = fecha;
     }
 
     // 2. Renderizar inputs de invitados dinámicamente
     const contenedor = document.getElementById('contenedorInvitadosModal');
-    contenedor.innerHTML = ''; // Limpiar contenedor
+    if (contenedor) {
+        contenedor.innerHTML = '';
+        const invitados = familia.invitados || familia.Invitados || [];
 
-    const invitados = familia.invitados || familia.Invitados || [];
+        invitados.forEach((invitado, index) => {
+            const div = document.createElement('div');
+            div.className = 'flex flex-col gap-1';
 
-    invitados.forEach((invitado, index) => {
-        const div = document.createElement('div');
-        div.className = 'flex flex-col gap-1';
+            div.innerHTML = `
+                <label class="label">Boleto ${index + 1}</label>
+                <input type="hidden" name="invitados[${index}][id]" value="${invitado.id || invitado.Id || ''}" />
+                <input type="text" 
+                       name="invitados[${index}][nombre_completo]" 
+                       value="${invitado.nombre_completo || invitado.nombreCompleto || ''}" 
+                       class="input" 
+                       placeholder="Nombre del invitado" />
+            `;
 
-        div.innerHTML = `
-            <label class="label">Boleto ${index + 1}</label>
-            <!-- Input oculto para conservar el ID del invitado -->
-            <input type="hidden" name="Invitados[${index}].Id" value="${invitado.id || invitado.Id}" />
-            
-            <!-- Input con el nombre completo -->
-            <input type="text" 
-                   name="Invitados[${index}].NombreCompleto" 
-                   value="${invitado.nombreCompleto || invitado.NombreCompleto || ''}" 
-                   class="input" 
-                   placeholder="Nombre del invitado" />
-        `;
+            contenedor.appendChild(div);
+        });
+    }
 
-        contenedor.appendChild(div);
-    });
-    
     // 3. Animación de apertura
     EditarFamilia.classList.remove('hidden');
 
     setTimeout(() => {
         contenidoEditarFamilia.classList.remove('translate-y-[100vh]');
-    }, 300);
+    }, 50);
 
     EditarFamilia.addEventListener('click', cerrarEditarFamiliaFuera);
 }
+
 function cerrarEditarFamilia() {
     const EditarFamilia = document.getElementById('ModalEditarFamilia');
     const contenidoEditarFamilia = document.getElementById('contenidoEditarFamilia');
+
+    if (!contenidoEditarFamilia || !EditarFamilia) return;
 
     contenidoEditarFamilia.classList.add('translate-y-[100vh]');
 
@@ -328,29 +338,30 @@ function cerrarEditarFamilia() {
 
 function cerrarEditarFamiliaFuera(e) {
     const contenidoEditarFamilia = document.getElementById('contenidoEditarFamilia');
-
-    // Si el click NO fue dentro del contenido
-    if (!contenidoEditarFamilia.contains(e.target)) {
+    if (contenidoEditarFamilia && !contenidoEditarFamilia.contains(e.target)) {
         cerrarEditarFamilia();
     }
 }
 
 function confirmarEliminarFamilia() {
-    // Tomamos el Id y Nombre del modal activo
-    const idFamilia = document.getElementById('edit_Id').value;
-    const nombreFamilia = document.getElementById('familia').value;
+    const idFamilia = document.getElementById('edit_Id')?.value;
+    const nombreFamilia = document.getElementById('familia')?.value || 'esta familia';
 
     if (!idFamilia) return;
 
     if (confirm(`¿Estás seguro de que deseas eliminar a la familia "${nombreFamilia}"? Esta acción borrará también todos sus boletos asignados.`)) {
-        document.getElementById('delete_Id').value = idFamilia;
-        document.getElementById('formEliminarFamilia').submit();
+        const form = document.getElementById('formEliminarFamilia');
+        const deleteId = document.getElementById('delete_Id');
+        if (deleteId) deleteId.value = idFamilia;
+        if (form) form.submit();
     }
 }
 
+// Menú móvil
 function abrirMenuMovil() {
     const menuMovil = document.getElementById('menuMovil');
     const ctnMenuMovil = document.getElementById('ctnMenuMovil');
+    if (!menuMovil || !ctnMenuMovil) return;
 
     menuMovil.classList.remove('hidden');
 
@@ -358,13 +369,13 @@ function abrirMenuMovil() {
         ctnMenuMovil.classList.remove('-translate-x-[500px]');
     }, 10);
 
-    // Click fuera del contenido
     menuMovil.addEventListener('click', cerrarMenuMovilFuera);
 }
 
 function cerrarMenuMovil() {
     const menuMovil = document.getElementById('menuMovil');
     const ctnMenuMovil = document.getElementById('ctnMenuMovil');
+    if (!menuMovil || !ctnMenuMovil) return;
 
     ctnMenuMovil.classList.add('-translate-x-[500px]');
 
@@ -376,10 +387,39 @@ function cerrarMenuMovil() {
 
 function cerrarMenuMovilFuera(e) {
     const ctnMenuMovil = document.getElementById('ctnMenuMovil');
-
-    // Si el click NO fue dentro del menú
-    if (!ctnMenuMovil.contains(e.target)) {
+    if (ctnMenuMovil && !ctnMenuMovil.contains(e.target)) {
         cerrarMenuMovil();
     }
 }
 
+// Animación sobre invitación (tarjeta emergiendo de abajo hacia arriba)
+function animarSobreInvitacion() {
+    const sobre = document.getElementById('imgSobreInvitacion');
+    if (sobre && !sobre.classList.contains('translate-y-0')) {
+        setTimeout(() => {
+            sobre.classList.remove('sm:translate-y-40', 'translate-y-[27vw]');
+            sobre.classList.add('translate-y-0');
+        }, 300);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    animarSobreInvitacion();
+});
+
+// ==========================================
+// Exposición de funciones a nivel global (window)
+// REQUERIDO para módulos Vite + handlers inline (onclick, onsubmit)
+// ==========================================
+window.mostrarCargando = mostrarCargando;
+window.ocultarCargando = ocultarCargando;
+window.mostarOcultarContraseña = mostarOcultarContraseña;
+window.AbrirModalEditarFamilia = AbrirModalEditarFamilia;
+window.cerrarEditarFamilia = cerrarEditarFamilia;
+window.cerrarEditarFamiliaFuera = cerrarEditarFamiliaFuera;
+window.confirmarEliminarFamilia = confirmarEliminarFamilia;
+window.abrirMenuMovil = abrirMenuMovil;
+window.cerrarMenuMovil = cerrarMenuMovil;
+window.cerrarMenuMovilFuera = cerrarMenuMovilFuera;
+window.verMensajeUno = verMensajeUno;
+window.animarSobreInvitacion = animarSobreInvitacion;

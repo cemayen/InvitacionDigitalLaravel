@@ -13,7 +13,12 @@
 @endphp
 <section class="w-full flex flex-col gap-14 overflow-x-hidden">
     <div class="sm:max-w-150 w-full mx-auto flex flex-col gap-5">
-        <img src="{{ asset('assets/imgs/sobreNegroAbierto.svg') }}" class="w-full" alt="Sobre Foto">
+        <div class="relative">
+            <img src="{{ asset('assets/imgs/sobre/back.webp') }}" class="w-full" alt="Sobre Foto">
+            <img src="{{ asset('assets/imgs/sobre/mid.webp') }}" class="w-full absolute top-0 sm:translate-y-40 translate-y-[27vw] transition-transform duration-1000 ease-out will-change-transform" id="imgSobreInvitacion" alt="Sobre Foto">
+            <img src="{{ asset('assets/imgs/sobre/front.webp') }}" class="w-full absolute top-0" alt="Sobre Foto">
+            {{-- <img src="{{ asset('assets/imgs/sobreNegroAbierto.svg') }}" class="w-full" alt="Sobre Foto"> --}}
+        </div>
         <div class="px-4 flex flex-col gap-5">
             <img src="{{ asset('assets/imgs/decorativo.svg') }}" class="w-full sm:max-w-95 max-w-67 mx-auto" alt="decorativo">
             <img src="{{ asset('assets/imgs/fecha.svg') }}" class="w-full sm:max-w-102.5 max-w-71.5 mx-auto py-10" alt="01/MAYO/2027">
@@ -328,6 +333,24 @@
 
 @section('scripts')
 <script>
+    // Animación suave de la tarjeta emergiendo del sobre
+    function animarSobreInvitacion() {
+        const sobre = document.getElementById("imgSobreInvitacion");
+        if (sobre) {
+            setTimeout(() => {
+                sobre.classList.remove("sm:translate-y-40", "translate-y-[27vw]");
+                sobre.classList.add("translate-y-0");
+            }, 300);
+        }
+    }
+
+    if (document.readyState === "complete") {
+        animarSobreInvitacion();
+    } else {
+        window.addEventListener("load", animarSobreInvitacion);
+        document.addEventListener("DOMContentLoaded", animarSobreInvitacion);
+    }
+
     const fechaObjetivo = new Date("2027-05-01T00:00:00").getTime();
 
     const _dias = document.getElementById("dias");

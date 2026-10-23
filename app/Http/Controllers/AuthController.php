@@ -65,7 +65,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login');
+        return redirect()->route('inicio.index');
     }
 
     public function accesoEnlace(Request $request, User $user)

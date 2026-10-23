@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
             spaceBetweenValueXs = 0;
             spaceBetweenValueXxs = 0;
             loopValue = false;
+            delayValue =50000;
         }
         if (itemsCarrusel.length > 0) {
             var swiper = new Swiper(carrusel, {

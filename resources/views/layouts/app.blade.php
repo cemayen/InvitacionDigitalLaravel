@@ -21,7 +21,6 @@
     @include('partials.header')
 
     <main role="main" class="pb-25">
-        
             @if (session('exito'))
                 <div class="max-w-4xl mx-auto mb-6 p-4 bg-salvia/20 border border-salvia text-salvia font-medium text-sm rounded-lg text-center shadow-sm">
                     {{ session('exito') }}

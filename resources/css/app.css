@@ -300,3 +300,16 @@ input:focus {
     background-repeat: no-repeat;
     background-size: cover;
 }
+.bgFoto{
+  --o: var(--borde);
+  background-image: url(../../public/assets/imgs/textura.webp);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.action{
+  transition: all 0.3s ease-in;
+}
+.action:hover{
+  @apply scale-105
+}

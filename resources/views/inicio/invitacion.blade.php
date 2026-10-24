@@ -99,7 +99,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-col gap-0">
+        <div class="flex flex-col gap-14">
             <div class="ticket exterior xxs:px-8 px-5 bg-arena">
                 <div class="ticket interior bg-marfil-2 flex flex-col gap-14 px-10 py-16 relative">
                     <div class="flex flex-col gap-10">
@@ -126,10 +126,11 @@
                     {{-- <img src="{{ asset('assets/imgs/decorativo.svg') }}" class="w-full sm:max-w-95 max-w-67 mx-auto" alt="decorativo"> --}}
                 </div>
             </div>
-            <div class="ticket exterior xxs:px-8 px-5 bg-arena -mt-1 relative">
-                <svg class="-mt-1 w-full h-1 text-marfil-2" preserveAspectRatio="none">
+            <img src="{{ asset('assets/imgs/decorativo.svg') }}" class="w-full sm:max-w-95 max-w-67 mx-auto" alt="decorativo">
+            <div class="ticket exterior xxs:px-8 px-5 bg-arena  relative">
+                <!-- <svg class="-mt-1 w-full h-1 text-marfil-2" preserveAspectRatio="none">
                     <line x1="0" y1="2" x2="100%" y2="2" stroke="currentColor" stroke-width="4" stroke-dasharray="11 10"/>
-                </svg>
+                </svg> -->
                 <div class="ticket interior p-10 bg-marfil-2 flex flex-col gap-10">
                     <h3 class="text-center text-arena sm:text-xl text-lg leading-125"><i>¡Con la bendicion de Dios y nustros padres!</i></h3>
                     <!-- Padres -->
@@ -177,8 +178,10 @@
         <!-- El lugar -->
         <div class="flex flex-col gap-0">
             <div class="ticket exterior xxs:px-8 px-5 bg-arena">
-                <div class="ticket interior px-10 py-16 bg-marfil-2">
+                <div class="ticket interior px-10 py-16 bg-marfil-2 relative">
                     <div class="flex flex-col gap-10">
+                    <img src="{{ asset('assets/imgs/flor5.svg') }}" class="w-full latido xs:max-w-20 max-w-28 absolute left-0 xs:ml-6 top-0 xs:mt-6 -ml-7 -mt-2 mx-auto" alt="flor">
+                    <img src="{{ asset('assets/imgs/flor5.svg') }}" class="w-full latido xs:max-w-20 max-w-28 absolute right-0 top-0 scale-x-[-1] xs:mt-6 xs:mr-6 -mt-2 -mr-7 mx-auto" alt="flor">
                         <h2 class="text-center text-arena sm:text-4xl text-3xl leading-125">El lugar</h2>
                         <img src="{{ asset('assets/imgs/salonIcono.svg') }}" class="w-full sm:max-w-112.5 max-w-75.25 mx-auto" alt="">
                         <div class="flex flex-col gap-4">
@@ -238,12 +241,15 @@
         <div class="flex flex-col gap-10">
             <div class="flex flex-col gap-0">
                 <div class="ticket exterior xxs:px-8 px-5 bg-arena relative">
-                    <div class="ticket interior px-10 py-16 bg-marfil-2 flex flex-col gap-10 relative">
+                    <div class="ticket interior px-10 py-16 bg-marfil-2 flex flex-col gap-0 relative">
+                    <img src="{{ asset('assets/imgs/flor5.svg') }}" class="w-full latido xs:max-w-20 max-w-28 absolute left-0 xs:ml-6 top-0 xs:mt-6 -ml-7 -mt-2 mx-auto" alt="flor">
+                    <img src="{{ asset('assets/imgs/flor5.svg') }}" class="w-full latido xs:max-w-20 max-w-28 absolute right-0 top-0 scale-x-[-1] xs:mt-6 xs:mr-6 -mt-2 -mr-7 mx-auto" alt="flor">
                         <h2 class="text-center text-arena sm:text-4xl text-3xl leading-125">Código de vestimenta</h2>
                         <div class="relative">
-                            <img src="{{ asset('assets/imgs/flor5.svg') }}" class="absolute top-0 left-0 sm:w-32 xs:w-24 w-20 latido" alt="">
-                            <img src="{{ asset('assets/imgs/flor5.svg') }}" class="absolute bottom-0 right-0 sm:w-32 xs:w-24 w-20 scale-x-[-1] scale-y-[-1] latido" alt="">
+                            <!-- <img src="{{ asset('assets/imgs/flor5.svg') }}" class="absolute top-0 left-0 sm:w-32 xs:w-24 w-20 latido" alt="">
+                            <img src="{{ asset('assets/imgs/flor5.svg') }}" class="absolute bottom-0 right-0 sm:w-32 xs:w-24 w-20 scale-x-[-1] scale-y-[-1] latido" alt=""> -->
                             <div class="sm:w-52 w-44 mx-auto relative mb-10" id="lottievestimenta"></div>
+                            <p class="sm:text-2xl text-xl font-bold text-playfair text-arena absolute bottom-1 left-1/2 -translate-x-1/2 text-center"><i>Vestimenta Formal</i></p>
                         </div>
                     </div>
                 </div>
@@ -254,7 +260,7 @@
                     <div class="ticket interior px-10 py-10 bg-marfil-2 flex flex-col gap-5">
     
                         <div class="flex flex-col gap-3">
-                            <p class="sm:text-2xl text-xl font-bold text-playfair text-arena text-center"><i>Vestimenta Formal</i></p>
+                            
                             <p class="text-playfair text-center sm:text-lg"><i>Les pedimos de la manera más atenta no utilizar prendas en color</i></p>
                         </div>
                         <div class="xs:w-3/5 mx-auto grid grid-cols-3 gap-4 items-center">

@@ -3,6 +3,13 @@
 @section('title', 'Nuestra Boda - Jennie & Cristian')
 
 @section('content')
+{{-- Forzar loader visible vía CSS mientras cargan las imágenes críticas.
+     Se elimina desde JS cuando ya están listas. Sin esta etiqueta el loader
+     parpadea porque app.js (módulo Vite) corre DESPUÉS del script inline. --}}
+<style id="invitacion-loader-override">
+    #elemento-animacioncargando { display: flex !important; }
+    body { overflow: hidden !important; }
+</style>
 @php
     $fotos = [];
     foreach ([1, 2, 3, 4, 5, 6, 7, 8] as $n) {
@@ -360,62 +367,75 @@
 
 @section('scripts')
 <script>
-    // ──────────────────────────────────────────────────────────────
-    // Esperar a que las imágenes críticas del sobre estén cargadas
-    // antes de ocultar el loader y mostrar la página.
-    // ──────────────────────────────────────────────────────────────
+    // ── Flag sincrónico: bloquea que pageshow/load oculten el loader ──────────
+    // Esta asignación simple corre antes que app.js (módulo Vite), lo que
+    // está bien porque no llama a ninguna función externa.
     window.__esperandoImagenes = true;
-    mostrarCargando('Preparando invitación...');
 
-    function _mostrarPagina() {
-        if (!window.__esperandoImagenes) return; // ya se ejecutó
-        window.__esperandoImagenes = false;
-        ocultarCargando();
-        // Animación del sobre después de que el loader se cierra
-        const sobre = document.getElementById('imgSobreInvitacion');
-        if (sobre) {
-            setTimeout(() => {
-                sobre.classList.remove('sm:translate-y-40', 'translate-y-[27vw]');
-                sobre.classList.add('translate-y-0');
-            }, 150);
+    // ── Todo lo demás espera a DOMContentLoaded ───────────────────────────────
+    // En ese momento los módulos Vite ya corrieron → mostrarCargando y
+    // ocultarCargando ya están definidos en window.
+    document.addEventListener('DOMContentLoaded', function () {
+
+        function _mostrarPagina() {
+            if (!window.__esperandoImagenes) return; // seguridad: ejecutar una sola vez
+            window.__esperandoImagenes = false;
+
+            // Primero quitamos el CSS override (si no, ocultarCargando no puede ocultar)
+            var estiloOverride = document.getElementById('invitacion-loader-override');
+            if (estiloOverride) estiloOverride.remove();
+
+            ocultarCargando();
+
+            // Animación del sobre emergiendo
+            var sobre = document.getElementById('imgSobreInvitacion');
+            if (sobre) {
+                setTimeout(function () {
+                    sobre.classList.remove('sm:translate-y-40', 'translate-y-[27vw]');
+                    sobre.classList.add('translate-y-0');
+                }, 150);
+            }
         }
-    }
 
-    // Imágenes críticas: las 3 partes del sobre (above the fold)
-    const _imgsCriticas = [
-        document.querySelector('img[src*="sobre/back"]'),
-        document.querySelector('img[src*="sobre/mid"]'),
-        document.querySelector('img[src*="sobre/front"]'),
-    ].filter(img => img !== null);
+        // Imágenes críticas: las 3 partes del sobre (visible al entrar)
+        var _imgsCriticas = [
+            document.querySelector('img[src*="sobre/back"]'),
+            document.querySelector('img[src*="sobre/mid"]'),
+            document.querySelector('img[src*="sobre/front"]'),
+        ].filter(function (img) { return img !== null; });
 
-    if (_imgsCriticas.length === 0) {
-        // Si por alguna razón no encuentra las imágenes, mostrar de inmediato
-        _mostrarPagina();
-    } else {
-        const _pendientes = _imgsCriticas.filter(img => !img.complete || img.naturalWidth === 0);
-
-        if (_pendientes.length === 0) {
-            // Todas ya estaban en caché, mostrar de inmediato
+        if (_imgsCriticas.length === 0) {
+            // No se encontraron imágenes → mostrar de inmediato
             _mostrarPagina();
         } else {
-            let _cargadas = 0;
-            _pendientes.forEach(img => {
-                const _onListo = () => {
-                    _cargadas++;
-                    if (_cargadas >= _pendientes.length) _mostrarPagina();
-                };
-                img.addEventListener('load', _onListo, { once: true });
-                img.addEventListener('error', _onListo, { once: true }); // si falla, igual continúa
+            // Las que aún no terminaron de cargar
+            var _pendientes = _imgsCriticas.filter(function (img) {
+                return !img.complete || img.naturalWidth === 0;
             });
+
+            if (_pendientes.length === 0) {
+                // Todas ya en caché → mostrar de inmediato
+                _mostrarPagina();
+            } else {
+                var _cargadas = 0;
+                _pendientes.forEach(function (img) {
+                    var _onListo = function () {
+                        _cargadas++;
+                        if (_cargadas >= _pendientes.length) _mostrarPagina();
+                    };
+                    img.addEventListener('load', _onListo, { once: true });
+                    img.addEventListener('error', _onListo, { once: true }); // si falla, continúa igual
+                });
+            }
         }
-    }
 
-    // Fallback de seguridad: máximo 8 segundos de espera
-    setTimeout(() => { if (window.__esperandoImagenes) _mostrarPagina(); }, 8000);
+        // Fallback de seguridad: máximo 8 segundos
+        setTimeout(function () {
+            if (window.__esperandoImagenes) _mostrarPagina();
+        }, 8000);
+    });
 
-    // ──────────────────────────────────────────────────────────────
-    // Countdown
-    // ──────────────────────────────────────────────────────────────
+    // ── Countdown ──────────────────────────────────────────────────────────────
 
     const fechaObjetivo = new Date("2027-05-01T00:00:00").getTime();
 

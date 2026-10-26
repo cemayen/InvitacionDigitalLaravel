@@ -13,7 +13,9 @@ function ocultarCargando() {
     document.body.style.overflow = '';
 }
 
-window.addEventListener("load", () => ocultarCargando());
+window.addEventListener("load", () => {
+    if (!window.__esperandoImagenes) ocultarCargando();
+});
 
 // Listeners globales para animación cargando
 document.addEventListener("DOMContentLoaded", () => {

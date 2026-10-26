@@ -14,9 +14,27 @@
 <section class="w-full flex flex-col gap-14 overflow-x-hidden">
     <div class="sm:max-w-150 w-full mx-auto flex flex-col gap-5">
         <div class="relative">
-            <img src="{{ asset('assets/imgs/sobre/back.webp') }}" class="w-full" alt="Sobre Foto">
-            <img src="{{ asset('assets/imgs/sobre/mid.webp') }}" class="w-full absolute top-0 sm:translate-y-40 translate-y-[27vw] transition-transform duration-1000 ease-out will-change-transform" id="imgSobreInvitacion" alt="Sobre Foto">
-            <img src="{{ asset('assets/imgs/sobre/front.webp') }}" class="w-full absolute top-0" alt="Sobre Foto">
+            <img src="{{ asset('assets/imgs/sobre/back.webp') }}"
+                class="w-full"
+                alt="Sobre Foto"
+                fetchpriority="high"
+                loading="eager"
+                decoding="async">
+
+            <img src="{{ asset('assets/imgs/sobre/mid.webp') }}"
+                class="w-full absolute top-0 sm:translate-y-40 translate-y-[27vw] transition-transform duration-1000 ease-out will-change-transform"
+                id="imgSobreInvitacion"
+                alt="Sobre Foto"
+                fetchpriority="high"
+                loading="eager"
+                decoding="async">
+
+            <img src="{{ asset('assets/imgs/sobre/front.webp') }}"
+                class="w-full absolute top-0"
+                alt="Sobre Foto"
+                fetchpriority="high"
+                loading="eager"
+                decoding="async">
             {{-- <img src="{{ asset('assets/imgs/sobreNegroAbierto.svg') }}" class="w-full" alt="Sobre Foto"> --}}
         </div>
         <div class="px-4 flex flex-col gap-5">
@@ -165,7 +183,7 @@
                             <div class="swiper-wrapper">
                                 @for($i = 1; $i <= 6; $i++)
                                     <div class="swiper-slide bg-arena p-0.5 rounded-2xl">
-                                        <img src="{{ asset("assets/imgs/fam/{$i}.jpg") }}" class="size-full rounded-2xl xs:border-4 border-2 border-arena" alt="{{ $i }}">
+                                        <img src="{{ asset("assets/imgs/fam/{$i}.webp") }}" class="size-full rounded-2xl xs:border-4 border-2 border-arena" alt="{{ $i }}">
                                     </div>
                                 @endfor
                             </div>
@@ -342,23 +360,62 @@
 
 @section('scripts')
 <script>
-    // Animación suave de la tarjeta emergiendo del sobre
-    function animarSobreInvitacion() {
-        const sobre = document.getElementById("imgSobreInvitacion");
+    // ──────────────────────────────────────────────────────────────
+    // Esperar a que las imágenes críticas del sobre estén cargadas
+    // antes de ocultar el loader y mostrar la página.
+    // ──────────────────────────────────────────────────────────────
+    window.__esperandoImagenes = true;
+    mostrarCargando('Preparando invitación...');
+
+    function _mostrarPagina() {
+        if (!window.__esperandoImagenes) return; // ya se ejecutó
+        window.__esperandoImagenes = false;
+        ocultarCargando();
+        // Animación del sobre después de que el loader se cierra
+        const sobre = document.getElementById('imgSobreInvitacion');
         if (sobre) {
             setTimeout(() => {
-                sobre.classList.remove("sm:translate-y-40", "translate-y-[27vw]");
-                sobre.classList.add("translate-y-0");
-            }, 300);
+                sobre.classList.remove('sm:translate-y-40', 'translate-y-[27vw]');
+                sobre.classList.add('translate-y-0');
+            }, 150);
         }
     }
 
-    if (document.readyState === "complete") {
-        animarSobreInvitacion();
+    // Imágenes críticas: las 3 partes del sobre (above the fold)
+    const _imgsCriticas = [
+        document.querySelector('img[src*="sobre/back"]'),
+        document.querySelector('img[src*="sobre/mid"]'),
+        document.querySelector('img[src*="sobre/front"]'),
+    ].filter(img => img !== null);
+
+    if (_imgsCriticas.length === 0) {
+        // Si por alguna razón no encuentra las imágenes, mostrar de inmediato
+        _mostrarPagina();
     } else {
-        window.addEventListener("load", animarSobreInvitacion);
-        document.addEventListener("DOMContentLoaded", animarSobreInvitacion);
+        const _pendientes = _imgsCriticas.filter(img => !img.complete || img.naturalWidth === 0);
+
+        if (_pendientes.length === 0) {
+            // Todas ya estaban en caché, mostrar de inmediato
+            _mostrarPagina();
+        } else {
+            let _cargadas = 0;
+            _pendientes.forEach(img => {
+                const _onListo = () => {
+                    _cargadas++;
+                    if (_cargadas >= _pendientes.length) _mostrarPagina();
+                };
+                img.addEventListener('load', _onListo, { once: true });
+                img.addEventListener('error', _onListo, { once: true }); // si falla, igual continúa
+            });
+        }
     }
+
+    // Fallback de seguridad: máximo 8 segundos de espera
+    setTimeout(() => { if (window.__esperandoImagenes) _mostrarPagina(); }, 8000);
+
+    // ──────────────────────────────────────────────────────────────
+    // Countdown
+    // ──────────────────────────────────────────────────────────────
 
     const fechaObjetivo = new Date("2027-05-01T00:00:00").getTime();
 

@@ -13,6 +13,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
+    {{-- Preload de las imágenes prioritarias del hero/sobre --}}
+    <link rel="preload" as="image" href="{{ asset('assets/imgs/sobre/back.webp') }}" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ asset('assets/imgs/sobre/mid.webp') }}" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ asset('assets/imgs/sobre/front.webp') }}" fetchpriority="high">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="flex min-h-full flex-col overflow-x-hidden bg-marfil-2 font-sans text-gris-500">
@@ -102,6 +107,8 @@
             carroLottie();
         });
         window.addEventListener("pageshow", () => {
+            // Si una página está controlando el loader manualmente, no lo ocultamos aquí
+            if (window.__esperandoImagenes) return;
             const elementAnimacionCargando = document.querySelector("#elemento-animacioncargando");
             if (elementAnimacionCargando) {
                 elementAnimacionCargando.classList.add("hidden");

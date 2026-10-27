@@ -13,11 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    {{-- Preload de las imágenes prioritarias del hero/sobre --}}
-    <link rel="preload" as="image" href="{{ asset('assets/imgs/sobre/back.webp') }}" fetchpriority="high">
-    <link rel="preload" as="image" href="{{ asset('assets/imgs/sobre/mid.webp') }}" fetchpriority="high">
-    <link rel="preload" as="image" href="{{ asset('assets/imgs/sobre/front.webp') }}" fetchpriority="high">
-
+    
+    @stack('preloads')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="flex min-h-full flex-col overflow-x-hidden bg-marfil-2 font-sans text-gris-500">

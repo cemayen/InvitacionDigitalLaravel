@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('title', 'Nuestra Boda - Jennie & Cristian')
+@push('preloads')
+    {{-- Preload de las imágenes prioritarias del hero/sobre --}}
+    <link rel="preload" as="image" type="image/webp" href="{{ asset('assets/imgs/sobre/back.webp') }}" fetchpriority="high">
+    <link rel="preload" as="image" type="image/webp" href="{{ asset('assets/imgs/sobre/mid.webp') }}" fetchpriority="high">
+    <link rel="preload" as="image" type="image/webp" href="{{ asset('assets/imgs/sobre/front.webp') }}" fetchpriority="high">
+@endpush
 
 @section('content')
 {{-- Forzar loader visible vía CSS mientras cargan las imágenes críticas.
@@ -132,14 +138,17 @@
                         <img src="{{ asset('assets/imgs/flor5.svg') }}" class="w-full latido xs:max-w-20 max-w-28 absolute right-0 top-0 scale-x-[-1] xs:mt-6 xs:mr-6 -mt-2 -mr-7 mx-auto" alt="flor">
                         <h2 class="text-center text-arena sm:text-4xl text-3xl leading-125 relative">Nuestro Mejor Viaje <br> Empieza Hoy</h2>
                         <div class="flex flex-col gap-5">
-                            <p class="sm:text-left text-center">
-                                De la brisa de Coatzacoalcos al corazón de la CDMX, nuestros caminos se cruzaron para empezar
-                                la mayor aventura de nuestras vidas. Entre risas, complicidad y sueños compartidos, descubrimos
-                                que el mejor destino siempre es estar juntos.
+                            <p class=" text-center">
+                                Hay momentos que marcan un antes y un después, instantes que se quedan grabados en el corazón para siempre. 
+                                Decidir caminar juntos en la misma dirección ha sido la mejor decisión de nuestras vidas, y el 1 de mayo de 2027 
+                                daremos el «sí, acepto» rodeados del amor de las personas que más queremos.
                             </p>
-                            <p class="sm:text-left text-center">
-                                Hoy, listos para iniciar la expedición más importante y decir ¡Sí, acepto!, queremos que seas
-                                parte del comienzo de nuestro para siempre.
+                            <p class=" text-center">
+                                Tu presencia en este día es fundamental para nosotros, porque la alegría solo es completa cuando 
+                                se comparte con quienes han sido parte de nuestra historia. 
+                            </p>
+                            <p class=" text-center">
+                                Esperamos contar contigo para hacer de esta celebración un recuerdo inolvidable.
                             </p>
                             {{-- <svg class="w-24 mx-auto opacity-85 fill-arena" viewBox="0 0 453.08 468.35">
                                 <g id="Capa_1-2" data-name="Capa 1">
@@ -274,7 +283,7 @@
                             <!-- <img src="{{ asset('assets/imgs/flor5.svg') }}" class="absolute top-0 left-0 sm:w-32 xs:w-24 w-20 latido" alt="">
                             <img src="{{ asset('assets/imgs/flor5.svg') }}" class="absolute bottom-0 right-0 sm:w-32 xs:w-24 w-20 scale-x-[-1] scale-y-[-1] latido" alt=""> -->
                             <div class="sm:w-52 w-44 mx-auto relative mb-10" id="lottievestimenta"></div>
-                            <p class="sm:text-2xl text-xl font-bold text-playfair text-arena absolute bottom-1 left-1/2 -translate-x-1/2 text-center"><i>Vestimenta Formal</i></p>
+                            <p class="sm:text-2xl w-full text-xl font-bold text-playfair text-arena absolute bottom-0 -mb-3 left-1/2 -translate-x-1/2 text-center"><i>Vestimenta Formal</i></p>
                         </div>
                     </div>
                 </div>
@@ -310,16 +319,18 @@
         <div class=" flex flex-col  ">
             <!-- Mesa de regalos -->
             <div class="ticket exterior xxs:px-8 px-5 bg-arena">
-                <div class="ticket interior px-10 py-16 bg-marfil-2">
+                <div class="ticket interior px-10 py-16 bg-marfil-2 relative">
+                    <img src="{{ asset('assets/imgs/flor5.svg') }}" class="w-full latido xs:max-w-20 max-w-28 absolute left-0 xs:ml-6 top-0 xs:mt-6 -ml-7 -mt-2 mx-auto" alt="flor">
+                    <img src="{{ asset('assets/imgs/flor5.svg') }}" class="w-full latido xs:max-w-20 max-w-28 absolute right-0 top-0 scale-x-[-1] xs:mt-6 xs:mr-6 -mt-2 -mr-7 mx-auto" alt="flor">
                     <div class="flex flex-col gap-10">
                         <h2 class="text-center text-arena sm:text-4xl text-3xl leading-125">Mesa de regalos</h2>
-                        <p class="sm:text-left text-center">
+                        <p class=" text-center">
                             Tu presencia es nuestro mejor regalo. Si deseas consentirnos con un detalle adicional,
                             puedes consultar nuestra mesa de regalos
                         </p>
                         {{-- <img src="{{ asset('assets/imgs/mesaRegalos.svg') }}" class="mx-auto w-full xs:max-w-96 max-w-[90%]" alt=""> --}}
                         <div class="mx-auto w-full xs:max-w-96 max-w-[90%]" id="lottiemesa"></div>
-                        <a href="#" target="_blank" rel="noopener noreferrer" class="btnSecundario mx-auto">
+                        <a href="https://www.amazon.com.mx/wedding/share/JennieyCristian" target="_blank" rel="noopener noreferrer" class="btnSecundario mx-auto">
                             <span class="spanbtn"></span>
                             <p class="relative">Ver mesa de regalos</p>
                         </a>
@@ -332,23 +343,23 @@
                     <line x1="0" y1="2" x2="100%" y2="2" stroke="currentColor" stroke-width="4" stroke-dasharray="11 10"/>
                 </svg>
                 <div class="ticket interior px-10 py-10 bg-marfil-2 flex flex-col gap-7">
-                    <p class="sm:text-left text-center">
-                        o apoyarnos con una aportación en efectivo para nuestro nuevo hogar
+                    <p class=" text-center">
+                        O apoyarnos con una aportación en efectivo para nuestro nuevo hogar
                     </p>
                     <p class="text-center underline"><b>00121215452121052</b></p>
                     <img src="{{ asset('assets/imgs/bancoVerde.svg') }}" class="w-60 mx-auto" alt="">
                 </div>
             </div>
         </div>
-        <div >
-
-        </div>
+        <img src="{{ asset('assets/imgs/decorativo.svg') }}" class="w-full sm:max-w-95 max-w-67 mx-auto" alt="decorativo">
     
         <!-- Confirmar Asistencia -->
         <div class="ticket exterior xxs:px-8 px-5 bg-arena">
-            <div class="flex flex-col gap-10 ticket interior px-10 py-10 bg-marfil-2">
+            <div class="flex flex-col gap-10 ticket interior px-10 py-16 bg-marfil-2 relative">
+                <img src="{{ asset('assets/imgs/flor5.svg') }}" class="w-full latido xs:max-w-20 max-w-28 absolute left-0 xs:ml-6 top-0 xs:mt-6 -ml-7 -mt-2 mx-auto" alt="flor">
+                <img src="{{ asset('assets/imgs/flor5.svg') }}" class="w-full latido xs:max-w-20 max-w-28 absolute right-0 top-0 scale-x-[-1] xs:mt-6 xs:mr-6 -mt-2 -mr-7 mx-auto" alt="flor">
                 <h2 class="text-center text-arena sm:text-4xl text-3xl leading-125">Confirmar asistencia</h2>
-                <p class="sm:text-left text-center">
+                <p class=" text-center">
                     Queremos compartir este día tan especial contigo. Por favor, confirma tu asistencia iniciando sesión en el siguiente enlace:
                 </p>
                 <a href="{{ route('login') }}" class="btnSecundario mx-auto">

@@ -169,13 +169,14 @@ input:focus {
     transition: all 0.3s ease-in-out;
 }
 .carrusel-vertical {
+  border-radius: 15px;
   overflow: hidden;
-  mask-size: 100% 100%;
+/*   mask-size: 100% 100%;
   mask-repeat: no-repeat;
   mask-image: url('../../public/assets/imgs/mancha2.svg');
   mask-position: center;
-  mask-border: solid 2px #5C5C5C;
-  
+  mask-border: solid 2px #5C5C5C; */
+
 }
 
 .carrusel-track {
@@ -192,11 +193,11 @@ input:focus {
 }
 
 .carrusel-subir {
-  animation: subir 40s linear infinite;
+  animation: subir 70s linear infinite;
 }
 
 .carrusel-bajar {
-  animation: bajar 40s linear infinite;
+  animation: bajar 70s linear infinite;
 }
 
 @keyframes subir {

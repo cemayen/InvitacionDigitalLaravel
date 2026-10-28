@@ -18,7 +18,7 @@
 </style>
 @php
     $fotos = [];
-    foreach ([1, 2, 3, 4, 5, 6, 7, 8] as $n) {
+    foreach ([1, 5, 9, 2, 6, 10, 3, 14, 7, 11, 4, 8, 12, 13, 15] as $n) {
         $fotos[] = "assets/imgs/min/{$n}.webp";
     }
     // Cada columna con su dirección. Agrega más si quieres: ['subir', 'bajar', 'subir', 'bajar']
@@ -109,7 +109,7 @@
                 <div>
                     <div class="swiper carruselMarcoPrincipal border-[7px] border-arena bg-arena rounded-t-full rounded-b-3xl">
                         <div class="swiper-wrapper">
-                            @for($j = 1; $j <= 5; $j++)
+                            @for($j = 1; $j <= 7; $j++)
                                 <div class="swiper-slide bg-marfil-2">
                                     <img src="{{ asset("assets/imgs/arco/{$j}.webp") }}" class="w-full rounded-t-full rounded-b-3xl" alt="{{ $j }}">
                                 </div>
@@ -119,7 +119,7 @@
                     <div class="mt-4">
                         <div class="swiper carruselMarcoMiniatura">
                             <div class="swiper-wrapper">
-                                @for($i = 1; $i <= 5; $i++)
+                                @for($i = 1; $i <= 7; $i++)
                                     <div class="swiper-slide size-auto cursor-pointer opacity-60 [&.swiper-slide-thumb-active]:opacity-100 transition-opacity">
                                         <img src="{{ asset("assets/imgs/arcoMin/{$i}.webp") }}" class="size-full rounded-md border-2 border-arena" alt="{{ $i }}">
                                     </div>
@@ -246,9 +246,10 @@
             </div>
         </div>
     </div>
+    <img src="{{ asset('assets/imgs/decorativo.svg') }}" class="w-full sm:max-w-95 max-w-67 mx-auto" alt="decorativo">
     <div class=" w-full">
         <div class="sm:max-w-150 w-full mx-auto px-4 flex flex-col gap-14">
-            <div class="carrusel-vertical w-full aspect-[923.4/463.9] flex gap-3 px-1">
+            <div class="carrusel-vertical w-full aspect-[923.4/463.9] flex gap-3 ">
                 @foreach ($columnas as $c => $direccion)
                     @php
                         // Invierte el orden en columnas impares para que no coincidan las fotos
@@ -259,7 +260,7 @@
                     <div class="flex-1 min-w-0 overflow-hidden">
                         <div class="carrusel-track carrusel-{{ $direccion }}">
                             @foreach ([...$lista, ...$lista] as $i => $foto)
-                                <img src="{{ asset('' . $foto) }}" alt=""
+                                <img src="{{ asset('' . $foto) }}" class="" alt=""
                                     @if ($i >= count($lista)) aria-hidden="true" @endif>
                             @endforeach
                         </div>
@@ -267,9 +268,8 @@
                 @endforeach
             </div>
         </div>
-
     </div>
-    
+    <img src="{{ asset('assets/imgs/decorativo.svg') }}" class="w-full sm:max-w-95 max-w-67 mx-auto" alt="decorativo">
     <div class="sm:max-w-150 w-full mx-auto px-4 flex flex-col gap-14">
         <!-- Código de vestimenta -->
         <div class="flex flex-col gap-10">

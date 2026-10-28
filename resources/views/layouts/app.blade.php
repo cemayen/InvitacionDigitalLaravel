@@ -13,7 +13,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
+    <meta name="theme-color" content="#D8B690">
+    <meta name="copyright" content="Invitación Digital - Jennie & Cristian">
+    <meta name="description"
+        content="Te invitamos a nuestra boda Jennie & Cristian 1-MAY-2027.">
     
+    <link rel="canonical" href="https://jennieycristian.celebratu.com">
+
+    <meta property="og:title" content="Invitación Digital - Jennie & Cristian">
+    <meta property="og:type" content="website"> 
+    <meta property="og:url" content="https://jennieycristian.celebratu.com">
+    <meta property="og:site_name" content="Invitación Digital - Jennie & Cristian">
+    <meta property="og:image" content="https://jennieycristian.celebratu.com/assets/imgs/portada.webp?raw=true"> 
+    <meta property="og:description"
+        content="Te invitamos a nuestra boda Jennie & Cristian 1-MAY-2027.">
+    
+    <meta property="og:image:width" content="1500">
+    <meta property="og:image:height" content="1080">
+    <meta property="og:image:type" content="image/png">
+
     @stack('preloads')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>

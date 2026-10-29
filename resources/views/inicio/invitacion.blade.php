@@ -109,7 +109,7 @@
                 <div>
                     <div class="swiper carruselMarcoPrincipal border-[7px] border-arena bg-arena rounded-t-full rounded-b-3xl">
                         <div class="swiper-wrapper">
-                            @for($j = 1; $j <= 7; $j++)
+                            @for($j = 0; $j <= 5; $j++)
                                 <div class="swiper-slide bg-marfil-2">
                                     <img src="{{ asset("assets/imgs/arco/{$j}.webp") }}" class="w-full rounded-t-full rounded-b-3xl" alt="{{ $j }}">
                                 </div>
@@ -119,7 +119,7 @@
                     <div class="mt-4">
                         <div class="swiper carruselMarcoMiniatura">
                             <div class="swiper-wrapper">
-                                @for($i = 1; $i <= 7; $i++)
+                                @for($i = 0; $i <= 5; $i++)
                                     <div class="swiper-slide size-auto cursor-pointer opacity-60 [&.swiper-slide-thumb-active]:opacity-100 transition-opacity">
                                         <img src="{{ asset("assets/imgs/arcoMin/{$i}.webp") }}" class="size-full rounded-md border-2 border-arena" alt="{{ $i }}">
                                     </div>

@@ -72,7 +72,7 @@
             if (container && typeof bodymovin !== 'undefined') {
                 bodymovin.loadAnimation({
                     container: container,
-                    path: '{{ asset("assets/lotties/jcBlanco.json") }}',
+                    path: '{{ asset("assets/lotties/jcColor.json") }}',
                     renderer: 'svg',
                     loop: true,
                     autoplay: true,
